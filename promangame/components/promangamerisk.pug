@@ -1,0 +1,25 @@
+div( id=contentId class="ui small modal")
+  div(class="header") #{header}
+  if image
+    div(class="image content")
+      div(class="ui medium image")
+        img(src=image)
+      div(class="description") !{content}
+  else
+    div(class="content")
+      div(class="description") !{content}
+  div(class="actions")
+    each action, label in actions
+      if action.icon
+        div(class="ui ok labeled icon fluid " + action.color + " button" onClick="rpcServer['risk_" + id + "']('" + label + "', gameboard.clientId);" )
+          i(class="ui icon " + action.icon)
+          |#{label}
+      else
+        div(class="ui ok fluid " + action.color + " button" onClick="rpcServer['risk_" + id + "']('" + label + "', gameboard.clientId);") #{label}
+  script.
+    function afterAddDomContent() {
+      $('##{contentId}')
+        .modal('setting', 'closable', false)
+        .modal('show');
+    }
+

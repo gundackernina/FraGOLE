@@ -98,10 +98,15 @@ class GameController extends GameObject {
             if (item.supressSetup) {
                 continue;
             }
+            
+            
+            //Ask if item is instanceof Waypoint
+            //there can be specified waypoints that are 
+            //inherited of Waypoint
+            if (item instanceof Waypoint) {
+                item.draw();
+            }
             switch(item.constructor.name) {
-                case 'Waypoint':
-                    item.draw();
-                    break;
                 case 'PlayerToken':
                     if (item.owner.joined) {
                         item.draw();
@@ -186,7 +191,7 @@ class GameController extends GameObject {
             this.activePlayer = this.joinedPlayers[++currentIdx % playerCount];
             if (this.activePlayer.skipTurns !== 0) {
                 this.activePlayer.skipTurns -= 1;
-                this.next_player();
+                this.nextPlayer();
             }
         }
         return this.activePlayer;
