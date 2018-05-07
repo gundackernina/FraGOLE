@@ -1,3 +1,13 @@
+/**
+ * @Author: Nina Gundacker
+ * @Date:   2017-06-04T10:48:10+02:00
+ * @Email:  nina.gundacker@nefkom.net
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @License: MIT
+ * @Copyright: Nina Gundacker
+ */
 const Component = require('../../objects/Component.js').Component;
 const Collection = require('../../objects/Collection.js').Collection;
 const Templates = require('../../lib/FragoleTemplates.js');

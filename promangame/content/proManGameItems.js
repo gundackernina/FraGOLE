@@ -1,3 +1,13 @@
+/**
+ * @Author: Nina Gundacker
+ * @Date:   2017-06-04T10:48:10+02:00
+ * @Email:  nina.gundacker@nefkom.net
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @License: MIT
+ * @Copyright: Nina Gundacker
+ */
 const Lib = require('../../lib/FragoleLib.js');
 const ProManGameWaypoint = require('../objects/ProManGameWaypoint.js').ProManGameWaypoint;
 const ProManGameRisk = require('../objects/ProManGameRisk.js').ProManGameRisk;
@@ -101,13 +111,13 @@ let risks = {
         'OK':{action:'skip', value:1},
     }),
     risk2: new ProManGameRisk('risk2', 'Risiko',
-    '<p>2 Felder vor</p>',
+    '<p>Die Gruppe findet eine Abkürzung. 2 Felder vor.</p>',
     '',
     {
         'OK':{action:'forward', value:2},
     }),
     risk3: new ProManGameRisk('risk3', 'Risiko',
-    '<p>3 Felder zurück</p>',
+    '<p>Sie haben Ihren Geldbeutel liegen lassen: 3 Felder zurück</p>',
     '',
     {
         'OK':{action:'backward', value:3},
@@ -148,32 +158,38 @@ let risks = {
     {
         'OK':{action:'backToStart', value:0},
     }),
+    risk10: new ProManGameRisk('risk10', 'Risiko',
+    '<p>Die Hütte ist in Sicht: 1 Feld vorwärts</p>',
+    '',
+    {
+        'OK':{action:'forward', value:1},
+    }),   
 };
 
 //Frage-Karten
 let questions = {
     question1: new ProManGameQuestion('question1', 'Frage',
-        '<p>Was ist richtig?</p>',
+        '<p>Welche Grunddatentypen kennen Sie?</p>',
         '',
         {
-            '1 + 1 = 2':{correct:true, value:4},
-            '1 + 1 = 3':{correct:false, value:0},
+            'Integer, Float, Char, Boolean...':{correct:true, value:4},
+            'Array, List, Set...':{correct:false, value:0},
         }, 'Test'),
     question2: new ProManGameQuestion('question2', 'Frage',
-        '<p>Was ist richtig?</p>',
+        '<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers?</p>',
         '',
         {
-            '1 + 1 = 3':{correct:false, value:0},
-            '2 + 2 = 4':{correct:true, value:2},
-            '5 + 8 = 3':{correct:false, value:0},
+            'Tastatur, Maus, USB-Stick, Drucker, Mikrophon':{correct:false, value:0},
+            'Tastatur, Maus, Lautsprecher, Drucker, Mikrophon':{correct:true, value:2},
+            'Tastatur, Maus, Lautsprecher, Mikrophon, externe Festplatte':{correct:false, value:0},
         }, 'Test'),
     question3: new ProManGameQuestion('question3', 'Frage',
-        '<p>Was ist richtig?</p>',
+        '<p>Was bedeutet ASCII?</p>',
         '',
         {
-            '4 * 3 = 21':{correct:false, value:0},
-            '4 * 6 = 28':{correct:false, value:0},
-            '4 * 7 = 28':{correct:true, value:3},
+            'American Standard for Coded Intelligence Interchange':{correct:false, value:0},
+            'American Standard for Coded Information Intelligence':{correct:false, value:0},
+            'American Standard for Coded Information Interchange':{correct:true, value:3},
         }, 'Test'),
 }
 

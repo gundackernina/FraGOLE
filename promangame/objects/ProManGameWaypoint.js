@@ -1,12 +1,12 @@
 /**
- * @Author: Michael Bauer
+ * @Author: Nina Gundacker
  * @Date:   2017-06-04T10:48:10+02:00
- * @Email:  mb@bauercloud.de
- * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
- * @Last modified time: 2017-09-03T05:52:32+02:00
+ * @Email:  nina.gundacker@nefkom.net
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2017-09-03T14:40:20+02:00
  * @License: MIT
- * @Copyright: Michael Bauer
+ * @Copyright: Nina Gundacker
  */
 /** @module ProManGameWaypoint */
 const Waypoint = require('../../objects/Waypoint.js').Waypoint;

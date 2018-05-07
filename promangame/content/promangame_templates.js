@@ -1,14 +1,13 @@
 /**
- * @Author: Michael Bauer
- * @Date:   2017-06-06T08:21:49+02:00
- * @Email:  mb@bauercloud.de
- * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
- * @Last modified time: 2017-07-13T19:40:42+02:00
+ * @Author: Nina Gundacker
+ * @Date:   2017-06-04T10:48:10+02:00
+ * @Email:  nina.gundacker@nefkom.net
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2017-09-03T14:40:20+02:00
  * @License: MIT
- * @Copyright: Michael Bauer
+ * @Copyright: Nina Gundacker
  */
-
 const Templates = require('../../lib/FragoleTemplates.js');
 
 class RISK_DEFAULT extends Templates.ComponentTemplate {
@@ -53,7 +52,6 @@ class WAYPOINT_TASK extends Templates.ShapeTemplate {
     }
 }
 
-//dodgerblue
 class WAYPOINT_WATER extends Templates.ShapeTemplate {
     constructor() {
         super({shape:Templates.shapes.CIRCLE, fill:'cyan', stroke:'black', layer: 'back', radius:11});

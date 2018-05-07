@@ -2,8 +2,8 @@
  * @Author: Nina Gundacker
  * @Date:   2017-06-04T10:48:10+02:00
  * @Email:  nina.gundacker@nefkom.net
- * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
  * @Last modified time: 2017-09-03T14:40:20+02:00
  * @License: MIT
  * @Copyright: Nina Gundacker

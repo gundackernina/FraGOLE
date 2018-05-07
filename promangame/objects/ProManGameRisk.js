@@ -1,14 +1,13 @@
-// /**
-//  * @Author: Michael Bauer
-//  * @Date:   2017-05-20T09:25:44+02:00
-//  * @Email:  mb@bauercloud.de
-//  * @Project: Fragole - FrAmework for Gamified Online Learning Environments
-// * @Last modified by:   Michael Bauer
-// * @Last modified time: 2017-09-03T10:22:41+02:00
-// * @License: MIT
-// * @Copyright: Michael Bauer
-// */
-
+/**
+ * @Author: Nina Gundacker
+ * @Date:   2017-06-04T10:48:10+02:00
+ * @Email:  nina.gundacker@nefkom.net
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @License: MIT
+ * @Copyright: Nina Gundacker
+ */
 /** @module ProManGameRisk */
 const Prompt = require('../../objects/Prompt.js').Prompt;
 const Component = require('../../objects/Component.js').Component;
