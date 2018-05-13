@@ -171,7 +171,7 @@ function addOrRemoveInventory(wp, player) {
         } else {
             proCoinsAdd(player, 10);
         }    
-    //MINUS PROCOINS - nur bei agil
+    //MINUS PROCOINS - nur bei agil und Entscheidungspunkt
     } else if (wp.template instanceof CustomTemplates.WAYPOINT_GOLD &&
                 player.agil) {
         proCoinsAdd(player, -1);

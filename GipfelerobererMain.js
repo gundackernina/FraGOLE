@@ -24,9 +24,9 @@ const ProManGameStack = require('./promangame/objects/ProManGameStack.js').ProMa
 const ProManGameQuestion = require('./promangame/objects/ProManGameQuestion.js').ProManGameQuestion;
 const ProManGameQuestionStack = require('./promangame/objects/ProManGameQuestion.js').ProManGameQuestionStack;
 const ProManGamePlayer = require('./promangame/objects/ProManGamePlayer.js').ProManGamePlayer;
-const proManGameItems = require('./promangame/content/proManGameItems.js');
 const ProManGameTemplates = require('./promangame/content/promangame_templates.js');
 const ProManGameLib = require('./promangame/lib/ProManGameLib.js');
+const ProManGameItemLib = require('./promangame/lib/ProManGameItemLib.js');
 
 const player1_Id = 'Player1';
 const player2_Id = 'Player2'; 
@@ -126,11 +126,11 @@ let lobby = new Lobby(controller);
 
 STATE_INIT.setHandlers({
     enter:  (src) => {
-        let wps = proManGameItems.waypoints;
-        let risks = proManGameItems.risks;
-        let questions = proManGameItems.questions;
-        let tasks = proManGameItems.tasks;
-        let retros = proManGameItems.retros;
+        let wps = ProManGameItemLib.getProManGameWaypoints();
+        let risks = ProManGameItemLib.getProManGameRisks();
+        let questions = ProManGameItemLib.getProManGameQuestions();
+        let tasks = ProManGameItemLib.getProManGameTasks();
+        let retros = ProManGameItemLib.getProManGameRetros();
         stacks.proManGameRiskStack.addProManGameItems(risks);
         stacks.proManGameRiskStack.shuffle();
         stacks.proManGameQuestionStack.addProManGameItems(questions);
@@ -189,7 +189,7 @@ STATE_INIT.setHandlers({
         items.playerToken1.waypoint = items.wpStartZiel;
         items.playerToken2.waypoint = items.wpStartZiel;
 
-        proManGameItems.connectWaypoints();
+        ProManGameItemLib.connectWaypoints(wps);
         
         for (let p of src.joinedPlayers) {
             console.log(p.name);

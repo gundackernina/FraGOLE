@@ -44,13 +44,10 @@ class ProManGameQuestionStack extends ProManGameStack {
      * you can filter with a category
      */
     getProManGameQuestion(category) {
-        //if (typeof category === 'undefined') {
-            let max = this.stack.length;
-            let index = Math.floor(Math.random() * (max));
-            return this.proManGameItems.getItem(this.stack[index]);
-        //} else {
-            //
-        //}
+        //TODO: filter from category
+        let max = this.stack.length;
+        let index = Math.floor(Math.random() * (max));
+        return this.proManGameItems.getItem(this.stack[index]);
     } 
 }
 

@@ -8,16 +8,24 @@
  * @License: MIT
  * @Copyright: Nina Gundacker
  */
+
+ /**
+  * Hier sind die Default-Komponenten für das Spiel Gipfeleroberer gespeichert.
+  * Auf diese wird zurueckgegriffen wenn keine JSON-Konfiguration hinterlegt ist,
+  * oder die entsprechenden JSON-Dateien fuer die einzelnen Items nicht gefunden
+  * werden
+  */
 const Lib = require('../../lib/FragoleLib.js');
+const Question = require('../../objects/Prompt.js').Question;
+const CustomTemplates = require('../../content/custom_templates.js');
+
 const ProManGameWaypoint = require('../objects/ProManGameWaypoint.js').ProManGameWaypoint;
 const ProManGameRisk = require('../objects/ProManGameRisk.js').ProManGameRisk;
 const ProManGameQuestion = require('../objects/ProManGameQuestion.js').ProManGameQuestion;
-const Question = require('../../objects/Prompt.js').Question;
-const CustomTemplates = require('../../content/custom_templates.js');
 const ProManGameTemplates = require('./promangame_templates.js');
 
 // Waypoints
-let waypoints = {
+let defaultWaypoints = {
     //NORMALWEG
     wpStartZiel:    new ProManGameWaypoint('wpStartZiel', 'path1', 177, 450, false, true, false, false, CustomTemplates.WAYPOINT_GREEN),
     wp2:            new ProManGameWaypoint('wp2', 'path1', 151, 364, false, false, false, false, ProManGameTemplates.WAYPOINT_NORMAL),
@@ -103,7 +111,7 @@ let waypoints = {
 };
 
 //Risko-Karten
-let risks = {
+let defaultRisks = {
     risk1: new ProManGameRisk('risk1', 'Risiko',
     '<p>Einmal aussetzen</p>',
     '',
@@ -167,13 +175,13 @@ let risks = {
 };
 
 //Frage-Karten
-let questions = {
+let defaultQuestions = {
     question1: new ProManGameQuestion('question1', 'Frage',
         '<p>Welche Grunddatentypen kennen Sie?</p>',
         '',
         {
-            'Integer, Float, Char, Boolean...':{correct:true, value:4},
-            'Array, List, Set...':{correct:false, value:0},
+            'Integer, Float, Char, Boolean':{correct:true, value:4},
+            'Array, List, Set':{correct:false, value:0},
         }, 'Test'),
     question2: new ProManGameQuestion('question2', 'Frage',
         '<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers?</p>',
@@ -193,7 +201,7 @@ let questions = {
         }, 'Test'),
 }
 
-let tasks = {
+let defaultTasks = {
     task1: new Question('task1', 'Aufgabe',
         '<p>Wie sieht die binäre Zahl 101110 in der Hexadezimalen-Schreibweise aus?</p>',
         '',
@@ -212,7 +220,7 @@ let tasks = {
         }),
 }
 
-let retros = {
+let defaultRetros = {
     retro1: new Question('retro1', 'Retrospektive',
         '<p>An welchem Wegpunkt muss eine agile Gruppe einen ProCoin für Beratungsaufwand abgeben?</p>',
         '',
@@ -231,11 +239,11 @@ let retros = {
         }),
 }
 
-function connectWaypoints() {
+function defaultConnectWaypoints(wps) {
     let paths = {};
 
-    for (let k in waypoints) {
-        let wp= waypoints[k];
+    for (let k in wps) {
+        let wp= wps[k];
         if (paths[wp.category] instanceof Array) {
             paths[wp.category].push(wp);
         } else {
@@ -251,35 +259,35 @@ function connectWaypoints() {
 
     //connect paths
     //Normalweg Rundlauf
-    Lib.connectWaypoints([waypoints.wp36, waypoints.wpStartZiel], true);
+    Lib.connectWaypoints([wps.wp36, wps.wpStartZiel], true);
 
     //Connect Hoellensteig with Normalweg
-    Lib.connectWaypoints([waypoints.wpSplit5, waypoints.wp37], true);
-    Lib.connectWaypoints([waypoints.wp48, waypoints.wpStop], true);
+    Lib.connectWaypoints([wps.wpSplit5, wps.wp37], true);
+    Lib.connectWaypoints([wps.wp48, wps.wpStop], true);
 
     //Connect Fernblickweg with Normalweg
-    Lib.connectWaypoints([waypoints.wpSplit14, waypoints.wp49], true);
-    Lib.connectWaypoints([waypoints.wp53, waypoints.wpShopWater18], true);
+    Lib.connectWaypoints([wps.wpSplit14, wps.wp49], true);
+    Lib.connectWaypoints([wps.wp53, wps.wpShopWater18], true);
 
     //Connect Wasserfallsteig with Normalweg
-    Lib.connectWaypoints([waypoints.wpSplit9, waypoints.wp54], true);
-    Lib.connectWaypoints([waypoints.wp64, waypoints.wpStop], true);
+    Lib.connectWaypoints([wps.wpSplit9, wps.wp54], true);
+    Lib.connectWaypoints([wps.wp64, wps.wpStop], true);
 
     //Connect Panoramaweg with Wasserfallsteig and Normalweg
-    Lib.connectWaypoints([waypoints.wpSplit57, waypoints.wp65], true);
-    Lib.connectWaypoints([waypoints.wp69, waypoints.wpShopWater18], true);
+    Lib.connectWaypoints([wps.wpSplit57, wps.wp65], true);
+    Lib.connectWaypoints([wps.wp69, wps.wpShopWater18], true);
 
     //Connect Gemsenweg with Wasserfallsteig and Normalweg
-    Lib.connectWaypoints([waypoints.wpSplit61, waypoints.wp70], true);
-    Lib.connectWaypoints([waypoints.wp71, waypoints.wpShopWater22], true);
+    Lib.connectWaypoints([wps.wpSplit61, wps.wp70], true);
+    Lib.connectWaypoints([wps.wp71, wps.wpShopWater22], true);
 
 }
 
 module.exports = {
-    waypoints: waypoints,
-    connectWaypoints: connectWaypoints,
-    risks: risks,
-    questions: questions,
-    tasks: tasks,
-    retros: retros,
+    defaultWaypoints: defaultWaypoints,
+    defaultConnectWaypoints: defaultConnectWaypoints,
+    defaultRisks: defaultRisks,
+    defaultQuestions: defaultQuestions,
+    defaultTasks: defaultTasks,
+    defaultRetros: defaultRetros,
 };

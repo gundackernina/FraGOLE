@@ -1,0 +1,71 @@
+{
+	"object": "ProManGameQuestion",
+	"items": [
+		{
+            "id": "question1",
+			"header": "Frage",
+			"content": "<p>Welche Grunddatentypen kennen Sie?</p>",
+			"image": "",
+			"actions": [{
+				"Integer, Float, Char, Boolean": {
+					"correct": true,
+					"value": 4
+                    },
+                "Array, List, Set": {
+                    "correct": false,
+					"value": 0
+                    }
+				}
+            ],
+            "category": "Test",
+			"template": ""
+        },
+        {
+            "id": "question2",
+			"header": "Frage",
+			"content": "<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers!</p>",
+			"image": "",
+			"actions": [{
+				"Tastatur, Maus, USB-Stick, Drucker, Mikrophon": {
+					"correct": false,
+					"value": 0
+                    },
+                "Tastatur, Maus, Lautsprecher, Drucker, Mikrophon": {
+                    "correct": true,
+					"value": 2
+                    },
+                "Tastatur, Maus, Lautsprecher, Mikrophon, externe Festplatte": {
+                    "correct": false,
+                    "value": 0
+                    }
+                   
+				}
+            ],
+            "category": "Test",
+			"template": ""
+        },
+        {
+            "id": "question3",
+			"header": "Frage",
+			"content": "<p>Für was steht die Abkürzung ASCII?</p>",
+			"image": "",
+			"actions": [{
+				"American Standard for Coded Intelligence Interchange": {
+					"correct": false,
+					"value": 0
+                    },
+                "American Standard for Coded Information Intelligence": {
+                    "correct": false,
+					"value": 0
+                    },
+                "American Standard for Coded Information Interchange": {
+                    "correct": true,
+                    "value": 3
+                    }
+				}
+            ],
+            "category": "Test",
+			"template": ""
+        }
+    ]
+}

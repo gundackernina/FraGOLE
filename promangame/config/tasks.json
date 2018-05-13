@@ -1,0 +1,49 @@
+{
+	"object": "Question",
+	"items": [
+		{
+			"id": "task1",
+			"header": "Aufgabe",
+			"content": "<p>Wie sieht die binäre Zahl 101110 in der Hexadezimalen-Schreibweise aus?</p>",
+			"image": "",
+			"actions": [{
+				"B2": {
+					"correct": false,
+					"value": 0
+                    },
+                "2E": {
+                    "correct": true,
+					"value": 1
+                    },
+                "1F": {
+                    "correct": false,
+					"value": 0
+                    }
+				}
+			],
+			"template": ""
+        },
+        {
+            "id": "task2",
+			"header": "Aufgabe",
+			"content": "<p>Wie schreibt man die dezimale Zahl 144 im oktaler Schreibweise?</p>",
+			"image": "",
+			"actions": [{
+				"120": {
+					"correct": false,
+					"value": 0
+                    },
+                "432": {
+                    "correct": false,
+					"value": 0
+                    },
+                "220": {
+                    "correct": true,
+					"value": 1
+                    }
+				}
+			],
+			"template": ""
+        }
+    ]
+}

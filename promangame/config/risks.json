@@ -1,0 +1,145 @@
+{
+	"object": "ProManGameRisk",
+	"items": [
+		{
+			"id": "risk1",
+			"header": "Risiko",
+			"content": "<p>Einmal aussetzen</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "skip",
+					"value": 1
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk2",
+			"header": "Risiko",
+			"content": "<p>Die Gruppe findet eine Abkürzung. 2 Felder vor.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "forward",
+					"value": 2
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk3",
+			"header": "Risiko",
+			"content": "<p>Sie haben Ihren Geldbeutel liegen lassen: 3 Felder zurück</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "backward",
+					"value": 3
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk4",
+			"header": "Risiko",
+			"content": "<p>Sie finden eine Wasserflasche.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "water",
+					"value": 1
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk5",
+			"header": "Risiko",
+			"content": "<p>Sie machen eine Pause und bekommen dafür 2 ProCoins.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "proCoins",
+					"value": 2
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk6",
+			"header": "Risiko",
+			"content": "<p>Es fängt an zu regnen, wenn Sie keinen Regenschirm mitgenommen haben<br>müssen Sie eine Runde aussetzen.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "noUmbrella",
+					"value": 1
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk7",
+			"header": "Risiko",
+			"content": "<p>Ein Steinschlag hält ihre Wandergruppe auf.<br>Wenn Sie keinen Helm mitgenommen haben<br>müssen Sie zwei Runden aussetzen.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "noHelmet",
+					"value": 2
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk8",
+			"header": "Risiko",
+			"content": "<p>Eine steile Felswand behindert ihr Vorwärtskommen.<br>Wenn sie kein Seil mitgenommen haben<br>müssen Sie drei Runden aussetzen.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "noRope",
+					"value": 3
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk9",
+			"header": "Risiko",
+			"content": "<p>Sie haben ihren Rucksack im Auto liegen lassen.<br>Sie müssen zurück zum Start.</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "backToStart",
+					"value": 0
+					}
+				}
+			],
+			"template": ""
+		},
+		{
+			"id": "risk10",
+			"header": "Risiko",
+			"content": "<p>Die Hütte ist in Sicht: 1 Feld vorwärts</p>",
+			"image": "",
+			"actions": [{
+				"OK": {
+					"action": "forward",
+					"value": 1
+					}
+				}
+			],
+			"template": ""
+		}]
+	}
+	

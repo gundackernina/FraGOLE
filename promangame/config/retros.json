@@ -1,0 +1,49 @@
+{
+	"object": "Question",
+	"items": [
+		{
+			"id": "retro1",
+			"header": "Retrospektive",
+			"content": "<p>An welchem Wegpunkt muss eine agile Gruppe einen ProCoin für Beratungsaufwand abgeben?</p>",
+			"image": "",
+			"actions": [{
+				"Gelber Wegpunkt": {
+					"correct": true,
+					"value": 1
+                    },
+                "Hellblauer Wegpunkt": {
+                    "correct": false,
+					"value": 0
+                    },
+                "Grüner Wegpunkt": {
+                    "correct": false,
+					"value": 0
+                    }
+				}
+			],
+			"template": ""
+        },
+        {
+            "id": "retro2",
+			"header": "Retrospektive",
+			"content": "<p>Welchen Wegpunkt müssen alle Gruppen zwingend passieren?</p>",
+			"image": "",
+			"actions": [{
+				"Alpsteinhütte (Weiß)": {
+					"correct": false,
+					"value": 0
+                    },
+                "Gipfel Hoher Alpstein (Dunkelrot)": {
+                    "correct": true,
+					"value": 1
+                    },
+                "Fernblickweg Zum Großen Weißer (Weiß)": {
+                    "correct": false,
+					"value": 0
+                    }
+				}
+			],
+			"template": ""
+        }
+    ]
+}

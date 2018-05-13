@@ -1,0 +1,71 @@
+{
+	"object": "WaypointConnect",
+	"items": [
+		{
+            "info": "Connect Normalweg",
+            "wpFromId": "wp36",
+            "wpToId": "wpStartZiel",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with HoellenSteig",
+            "wpFromId": "wpSplit5",
+            "wpToId": "wp37",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with HoellenSteig",
+            "wpFromId": "wp48",
+            "wpToId": "wpStop",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with Wasserfallsteig",
+            "wpFromId": "wpSplit9",
+            "wpToId": "wp54",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with Wasserfallsteig",
+            "wpFromId": "wp64",
+            "wpToId": "wpStop",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with Fernblickweg",
+            "wpFromId": "wpSplit14",
+            "wpToId": "wp49",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Normalweg with Fernblickweg",
+            "wpFromId": "wp53",
+            "wpToId": "wpShopWater18",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Panoramaweg with Wasserfallsteig and Normalweg",
+            "wpFromId": "wpSplit57",
+            "wpToId": "wp65",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Panoramaweg with Wasserfallsteig and Normalweg",
+            "wpFromId": "wp69",
+            "wpToId": "wpShopWater18",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Gemsenweg with Wasserfallsteig and Normalweg",
+            "wpFromId": "wpSplit61",
+            "wpToId": "wp70",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Gemsenweg with Wasserfallsteig and Normalweg",
+            "wpFromId": "wp71",
+            "wpToId": "wpShopWater22",
+            "bothWays": true
+        }
+    ]
+}
