@@ -137,8 +137,7 @@ class Form extends Component {
     }
 
     // EVENTS
-
-    /** gets called wenn the submit button is clicke */
+    /** gets called wenn the submit button is clicked */
     post(data, clientId) {
         if (data[0] === 'submit') { 
             this.gameController.emit('formPost', this.id, data[1], this, clientId);

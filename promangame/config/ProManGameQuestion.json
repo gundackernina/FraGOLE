@@ -4,7 +4,7 @@
 		{
             "id": "question1",
 			"header": "Frage",
-			"content": "<p>Welche Grunddatentypen kennen Sie?</p>",
+			"content": "<p>Welche Grunddatentypen kennen Sie?</p><p>Wert: 4</p>",
 			"image": "",
 			"actions": [{
 				"Integer, Float, Char, Boolean": {
@@ -23,7 +23,7 @@
         {
             "id": "question2",
 			"header": "Frage",
-			"content": "<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers!</p>",
+            "content": "<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers!</p><p>Wert: 2</p>",
 			"image": "",
 			"actions": [{
 				"Tastatur, Maus, USB-Stick, Drucker, Mikrophon": {
@@ -47,7 +47,7 @@
         {
             "id": "question3",
 			"header": "Frage",
-			"content": "<p>Für was steht die Abkürzung ASCII?</p>",
+			"content": "<p>Für was steht die Abkürzung ASCII?</p><p>Wert: 3</p>",
 			"image": "",
 			"actions": [{
 				"American Standard for Coded Intelligence Interchange": {

@@ -1,0 +1,59 @@
+{
+	"object": "WaypointConnect",
+	"items": [
+        {
+            "info": "Connect Path1",
+            "wpFromId": "wp56",
+            "wpToId": "start",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path1 with Path2",
+            "wpFromId": "start",
+            "wpToId": "wp101",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path1 with Path2",
+            "wpFromId": "wp111",
+            "wpToId": "peak",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path4 with Path1",
+            "wpFromId": "wp305",
+            "wpToId": "camp1",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path2 with Path4",
+            "wpFromId": "bigcamp1",
+            "wpToId": "wp301",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path1 with Path3",
+            "wpFromId": "camp4",
+            "wpToId": "wp201",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path1 with Path3",
+            "wpFromId": "camp2",
+            "wpToId": "wp211",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path3 with Path5",
+            "wpFromId": "bigcamp2",
+            "wpToId": "wp401",
+            "bothWays": true
+        },
+        {
+            "info": "Connect Path5 with Path1",
+            "wpFromId": "wp405",
+            "wpToId": "camp3",
+            "bothWays": true
+        }
+    ]
+}

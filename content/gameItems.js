@@ -3,12 +3,11 @@
  * @Date:   2017-06-06T11:09:28+02:00
  * @Email:  mb@bauercloud.de
  * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
- * @Last modified time: 2017-07-13T19:41:32+02:00
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2018-05-19T11:09:28+02:00
  * @License: MIT
  * @Copyright: Michael Bauer
  */
-
 const Lib = require('../lib/FragoleLib.js');
 const Waypoint = require('../objects/FragoleObjects.js').Waypoint;
 const Prompt = require('../objects/FragoleObjects.js').Prompt;
@@ -164,17 +163,21 @@ let prompts = {
             'Eine Frage beantworten':{color:'green', icon:'help'},
             'Eine Karte ziehen':{color:'teal',  icon:'clone'},
         }),
-    question1: new Question('guestion1', 'Frage',
-        '<p>Was ist richtig?</p><iframe width="560" height="315" src="https://www.youtube.com/embed/pk1h4cyowqg" frameborder="0" allowfullscreen></iframe>',
-        '',
-        {
-            '1 + 1 = 2':{correct:true, value:10},
-            '1 + 1 = 3':{correct:false, value:0},
-        }),
 };
+
+let questions = {
+    question1: new Question('guestion1', 'Frage',
+    '<p>Was ist richtig?</p><iframe width="560" height="315" src="https://www.youtube.com/embed/pk1h4cyowqg" frameborder="0" allowfullscreen></iframe>',
+    '',
+    {
+        '1 + 1 = 2':{correct:true, value:10},
+        '1 + 1 = 3':{correct:false, value:0},
+    }),
+}
 
 module.exports = {
     waypoints: waypoints,
     connectWaypoints: connectWaypoints,
     prompts: prompts,
+    questions: questions,
 };

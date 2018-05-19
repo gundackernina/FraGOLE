@@ -3,14 +3,15 @@
  * @Date:   2017-06-04T10:48:10+02:00
  * @Email:  mb@bauercloud.de
  * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
- * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2018-05-19T11:09:28+02:00
  * @License: MIT
  * @Copyright: Michael Bauer
  */
 
 const FragoleServer = require('./lib/FragoleServer.js');
 const Lib = require('./lib/FragoleLib.js');
+const ItemLib = require('./lib/FragoleItemLib.js');
 const {Game, GameController, GameState, Player, PlayerToken, Collection,
        Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
        Progress, PlayerProgress, Prompt, Card, CardStack, CardHand, Button} = require('./objects/FragoleObjects.js');
@@ -27,10 +28,16 @@ let sessions = FragoleServer.sessions;
 let game = new Game();
 let controller = new GameController('game_controller1', 1, server);
 
+//get the port for the server
+let serverPort = Lib.getServerPort(process.argv);
+//Configuration Path of the jsonFiles
+let configPath = Lib.getConfigurationPath(process.argv);
+let configContentFiles = ItemLib.getConfigurationContentFromFiles(configPath);
+
 game.setName('TestGame')
     .addController(controller);
 server.setGame(game);
-server.start(80);
+server.start(serverPort);
 
 // STATES
 let STATE_INIT = new GameState('STATE_INIT');
@@ -113,7 +120,9 @@ let lobby = new Lobby(controller);
 STATE_INIT.setHandlers({
 
     enter:  () => {
-        let wps = gameItems.waypoints;
+        let wps = ItemLib.getWaypoints(configContentFiles["Waypoint"]);
+        let prompts = ItemLib.getPrompts(configContentFiles["Prompt"]);
+        let questions = ItemLib.getQuestions(configContentFiles["Question"]);
         // assign player_tokens etc. to players
         items.player1.addInventory(items.playerToken1);
         items.player1.addInventory(items.player1Points);
@@ -129,7 +138,8 @@ STATE_INIT.setHandlers({
         // init game with all items
         controller.addItems(items);
         controller.addItems(wps);
-        controller.addItems(gameItems.prompts);
+        controller.addItems(prompts);
+        controller.addItems(questions);
 
         controller.subscribe('globalRisk', items.globalRisk);
         controller.set('globalRisk', 0);
@@ -144,7 +154,8 @@ STATE_INIT.setHandlers({
         items.player2.set('path', wps.start.category);
 
         // connect waypoints - setup paths
-        gameItems.connectWaypoints();
+        //gameItems.connectWaypoints();
+        ItemLib.connectWaypoints(wps, configContentFiles["WaypointConnect"]);
         items.playerToken1.waypoint = wps.start;
         items.playerToken2.waypoint = wps.start;
 
@@ -152,7 +163,9 @@ STATE_INIT.setHandlers({
         items.btnEndTurn.draw(controller.joinedPlayers);
         items.btnEndTurn.deactivate(controller.joinedPlayers);
         controller.rpcCall(controller.joinedPlayers, ['drawImage', 'test', 'assets/connectors.png', 'back', 0, 0]);
-        controller.joinedPlayers.forEach((player) => { player.session.setBackgroundImage('/assets/base.jpg'); });
+        for (let p of controller.joinedPlayers) {
+            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles["BackgroundImage"]));
+        }
         controller.nextPlayer();
         controller.sendLog('Spiel', {content:'Herzlich Willkommen!'});
         controller.nextState(STATE_CHOOSE_ACTION);
@@ -174,7 +187,7 @@ controller.on('playCard', function playCard(src, card) {
 
 STATE_CHOOSE_ACTION.setHandlers({
     enter() {
-        gameItems.prompts.chooseAction.show(controller.activePlayer);
+        controller.items.chooseAction.show(controller.activePlayer);
         items.btnEndTurn.activate(controller.activePlayer);
     },
 
@@ -323,16 +336,19 @@ STATE_DRAW_CARD.setHandlers({
 
 STATE_QUESTION.setHandlers({
     enter() {
-        gameItems.prompts.question1.show(controller.activePlayer);
+        //gameItems.prompts.question1.show(controller.activePlayer);
+        controller.items.question1.show(controller.activePlayer);
     },
 
     questionWrong(id, option, value, question) {
-        gameItems.prompts.question1.showResult(controller.activePlayer);
+        //gameItems.prompts.question1.showResult(controller.activePlayer);
+        controller.items.question1.showResult(controller.activePlayer);
     },
 
     questionCorrect(id, option, value, question) {
         controller.activePlayer.inc('points', value);
-        gameItems.prompts.question1.showResult(controller.activePlayer);
+       //gameItems.prompts.question1.showResult(controller.activePlayer);
+       controller.items.question1.showResult(controller.activePlayer);
     },
 });
 

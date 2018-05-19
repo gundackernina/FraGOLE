@@ -1,0 +1,27 @@
+{
+	"object": "Prompt",
+	"items": [
+		{
+			"id": "chooseAction",
+            "header": "Du bist dran!",
+			"content": "<p>Du kannst eine von folgenden Aktionen ausführen:</p>",
+			"image": "",
+			"actions": [{
+				"Würfeln": {
+                    "color": "olive",
+                    "icon": "cube"
+                    },
+                "Eine Frage beantworten": {
+                    "color": "green",
+                    "icon": "help"
+                    },
+                "Eine Karte ziehen": {
+                    "color": "teal",
+                    "icon": "clone"
+                    }
+				}
+			],
+			"template": ""
+        }
+    ]
+}

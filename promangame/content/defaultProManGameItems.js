@@ -177,14 +177,14 @@ let defaultRisks = {
 //Frage-Karten
 let defaultQuestions = {
     question1: new ProManGameQuestion('question1', 'Frage',
-        '<p>Welche Grunddatentypen kennen Sie?</p>',
+        '<p>Welche Grunddatentypen kennen Sie?</p><p>Wert: 4</p>',
         '',
         {
             'Integer, Float, Char, Boolean':{correct:true, value:4},
             'Array, List, Set':{correct:false, value:0},
         }, 'Test'),
     question2: new ProManGameQuestion('question2', 'Frage',
-        '<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers?</p>',
+        '<p>Nennen Sie fünf verschiedene Bestandteile der Peripherie eines Computers?</p><p>Wert: 2</p>',
         '',
         {
             'Tastatur, Maus, USB-Stick, Drucker, Mikrophon':{correct:false, value:0},
@@ -192,7 +192,7 @@ let defaultQuestions = {
             'Tastatur, Maus, Lautsprecher, Mikrophon, externe Festplatte':{correct:false, value:0},
         }, 'Test'),
     question3: new ProManGameQuestion('question3', 'Frage',
-        '<p>Was bedeutet ASCII?</p>',
+        '<p>Was bedeutet ASCII?</p<p>Wert: 3</p>',
         '',
         {
             'American Standard for Coded Intelligence Interchange':{correct:false, value:0},

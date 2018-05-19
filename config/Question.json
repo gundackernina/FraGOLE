@@ -1,0 +1,23 @@
+{
+	"object": "Question",
+	"items": [
+		{
+			"id": "question1",
+			"header": "Frage",
+			"content": "<p>Was ist richtig?</p>",
+			"image": "",
+			"actions": [{
+				"1 + 1 = 2": {
+					"correct": true,
+					"value": 10
+                    },
+                "1 + 1 = 3": {
+                    "correct": false,
+					"value": 0
+                    }
+				}
+			],
+			"template": ""
+        }
+    ]
+}

@@ -1,15 +1,16 @@
 /**
  * @Author: Nina Gundacker
- * @Date:   2017-06-04T10:48:10+02:00
+ * @Date:   2018-05-06T10:48:10+02:00
  * @Email:  nina.gundacker@nefkom.net
- * @Project: Fragole - FrAmework for Gamified Online Learning Environments
- * @Last modified by:   Michael Bauer
- * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @Project: ProManGameWithFraGOLE
+ * @Last modified by:   Nina Gundacker
+ * @Last modified time: 2018-05-19T10:48:10+02:00
  * @License: MIT
  * @Copyright: Nina Gundacker
  */
 const FragoleServer = require('./lib/FragoleServer.js');
 const Lib = require('./lib/FragoleLib.js');
+const ItemLib = require('./lib/FragoleItemLib.js');
 const {Game, GameController, GameState, Player, PlayerToken, Collection,
        Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
        Progress, PlayerProgress, Prompt, Question, Card, CardStack, CardHand,
@@ -30,22 +31,26 @@ const ProManGameItemLib = require('./promangame/lib/ProManGameItemLib.js');
 
 const player1_Id = 'Player1';
 const player2_Id = 'Player2'; 
-
-let server = new FragoleServer.Server();
-let sessions = FragoleServer.sessions;
-
 let onePlayerFinished = false;
 
 // ****************************************************************************
 // Game definition
+// ****************************************************************************
+let server = new FragoleServer.Server();
+let sessions = FragoleServer.sessions;
 let game = new Game();
 let controller = new GameController('game_controller1', 1, server);
+
+//den Port ermitteln auf dem der Server laufen soll
+let serverPort = Lib.getServerPort(process.argv);
+//Configuration Path für die JSON Files
+let configPath = Lib.getConfigurationPath(process.argv);
+let configContentFiles = ItemLib.getConfigurationContentFromFiles(configPath);
 
 game.setName('Gipfeleroberer')
     .addController(controller);
 server.setGame(game);
-//Port mal auf die 81 legen, damit man zwei Instanzen laufen lassen kann
-server.start(81);
+server.start(serverPort);
 
 // STATES
 let STATE_INIT = new GameState('STATE_INIT');
@@ -126,11 +131,11 @@ let lobby = new Lobby(controller);
 
 STATE_INIT.setHandlers({
     enter:  (src) => {
-        let wps = ProManGameItemLib.getProManGameWaypoints();
-        let risks = ProManGameItemLib.getProManGameRisks();
-        let questions = ProManGameItemLib.getProManGameQuestions();
-        let tasks = ProManGameItemLib.getProManGameTasks();
-        let retros = ProManGameItemLib.getProManGameRetros();
+        let wps = ProManGameItemLib.getProManGameWaypoints(configContentFiles["ProManGameWaypoint"]);
+        let risks = ProManGameItemLib.getProManGameRisks(configContentFiles["ProManGameRisk"]);
+        let questions = ProManGameItemLib.getProManGameQuestions(configContentFiles["ProManGameQuestion"]);
+        let tasks = ProManGameItemLib.getProManGameTasks(configContentFiles["ProManGameTask"]);
+        let retros = ProManGameItemLib.getProManGameRetros(configContentFiles["ProManGameRetro"]);
         stacks.proManGameRiskStack.addProManGameItems(risks);
         stacks.proManGameRiskStack.shuffle();
         stacks.proManGameQuestionStack.addProManGameItems(questions);
@@ -189,11 +194,11 @@ STATE_INIT.setHandlers({
         items.playerToken1.waypoint = items.wpStartZiel;
         items.playerToken2.waypoint = items.wpStartZiel;
 
-        ProManGameItemLib.connectWaypoints(wps);
+        ProManGameItemLib.connectProManGameWaypoints(wps, configContentFiles["WaypointConnect"]);
         
         for (let p of src.joinedPlayers) {
             console.log(p.name);
-            p.session.setBackgroundImage('assets/background.jpg');
+            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles["BackgroundImage"]));
         };
 
         //alles zeichnen lassen
@@ -418,7 +423,7 @@ STATE_RISK.setHandlers({
 
     //entweder alles ok, oder aussetzen, weil Player keinen
     //Helm hat
-    noRope: (id, option, value, risk, clientId) => {
+    noHelmet: (id, option, value, risk, clientId) => {
         console.log("played noHelmet card");
         let player = risk.gameController.playersId[clientId];
         let helmet = player.getInventory({id: player.id + 'Helmet'});

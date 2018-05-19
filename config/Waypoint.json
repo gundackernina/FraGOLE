@@ -1,0 +1,611 @@
+{
+	"object": "Waypoint",
+	"items": [
+		{
+            "id": "start",
+            "category": "path1",
+            "x": 65,
+            "y": 650,
+            "template": "CustomTemplates.WAYPOINT_GREEN"
+        },
+        {
+            "id": "wp2",
+            "category": "path1",
+            "x": 35,
+            "y": 590,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp3",
+            "category": "path1",
+            "x": 32,
+            "y": 540,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp4",
+            "category": "path1",
+            "x": 55,
+            "y": 490,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp6",
+            "category": "path1",
+            "x": 90,
+            "y": 390,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp7",
+            "category": "path1",
+            "x": 70,
+            "y": 337,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },        
+        {
+            "id": "wp8",
+            "category": "path1",
+            "x": 45,
+            "y": 285,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "camp1",
+            "category": "path1",
+            "x": 45,
+            "y": 220,
+            "template": "CustomTemplates.WAYPOINT_LIGHT_BLUE"
+        },
+        {
+            "id": "wp11",
+            "category": "path1",
+            "x": 78,
+            "y": 780,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp12",
+            "category": "path1",
+            "x": 130,
+            "y": 153,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp13",
+            "category": "path1",
+            "x": 182,
+            "y": 143,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp14",
+            "category": "path1",
+            "x": 234,
+            "y": 140,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp15",
+            "category": "path1",
+            "x": 286,
+            "y": 138,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp16",
+            "category": "path1",
+            "x": 338,
+            "y": 138,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp17",
+            "category": "path1",
+            "x": 390,
+            "y": 152,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp18",
+            "category": "path1",
+            "x": 442,
+            "y": 148,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp19",
+            "category": "path1",
+            "x": 494,
+            "y": 120,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp20",
+            "category": "path1",
+            "x": 546,
+            "y": 120,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp21",
+            "category": "path1",
+            "x": 598,
+            "y": 115,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp22",
+            "category": "path1",
+            "x": 640,
+            "y": 70,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "peak",
+            "category": "path1",
+            "x": 685,
+            "y": 30,
+            "template": "CustomTemplates.WAYPOINT_ORANGE"
+        },
+        {
+            "id": "wp24",
+            "category": "path1",
+            "x": 760,
+            "y": 42,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp25",
+            "category": "path1",
+            "x": 820,
+            "y": 33,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp26",
+            "category": "path1",
+            "x": 875,
+            "y": 40,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp27",
+            "category": "path1",
+            "x": 925,
+            "y": 70,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp28",
+            "category": "path1",
+            "x": 952,
+            "y": 112,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "camp2",
+            "category": "path1",
+            "x": 960,
+            "y": 162,
+            "template": "CustomTemplates.WAYPOINT_LIGHT_BLUE"
+        },
+        {
+            "id": "wp30",
+            "category": "path1",
+            "x": 995,
+            "y": 205,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp31",
+            "category": "path1",
+            "x": 1025,
+            "y": 250,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp32",
+            "category": "path1",
+            "x": 1020,
+            "y": 300,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp33",
+            "category": "path1",
+            "x": 1020,
+            "y": 350,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp34",
+            "category": "path1",
+            "x": 1062,
+            "y": 380,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "camp3",
+            "category": "path1",
+            "x": 1070,
+            "y": 427,
+            "template": "CustomTemplates.WAYPOINT_LIGHT_BLUE"
+        },
+        {
+            "id": "wp36",
+            "category": "path1",
+            "x": 1045,
+            "y": 473,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp37",
+            "category": "path1",
+            "x": 1032,
+            "y": 525,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp38",
+            "category": "path1",
+            "x": 1040,
+            "y": 575,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp39",
+            "category": "path1",
+            "x": 1025,
+            "y": 618,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp40",
+            "category": "path1",
+            "x": 975,
+            "y": 632,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp41",
+            "category": "path1",
+            "x": 925,
+            "y": 626,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp42",
+            "category": "path1",
+            "x": 875,
+            "y": 618,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp43",
+            "category": "path1",
+            "x": 825,
+            "y": 638,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp44",
+            "category": "path1",
+            "x": 775,
+            "y": 656,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp45",
+            "category": "path1",
+            "x": 725,
+            "y": 655,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp46",
+            "category": "path1",
+            "x": 675,
+            "y": 653,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp47",
+            "category": "path1",
+            "x": 625,
+            "y": 653,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp48",
+            "category": "path1",
+            "x": 575,
+            "y": 660,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp49",
+            "category": "path1",
+            "x": 525,
+            "y": 670,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp50",
+            "category": "path1",
+            "x": 475,
+            "y": 668,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp51",
+            "category": "path1",
+            "x": 425,
+            "y": 655,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "camp4",
+            "category": "path1",
+            "x": 360,
+            "y": 645,
+            "template": "CustomTemplates.WAYPOINT_LIGHT_BLUE"
+        },
+        {
+            "id": "wp53",
+            "category": "path1",
+            "x": 300,
+            "y": 658,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp54",
+            "category": "path1",
+            "x": 245,
+            "y": 663,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp55",
+            "category": "path1",
+            "x": 190,
+            "y": 658,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+        {
+            "id": "wp56",
+            "category": "path1",
+            "x": 135,
+            "y": 665,
+            "template": "CustomTemplates.WAYPOINT_SMALL_WHITE"
+        },
+
+        {
+            "id": "wp101",
+            "category": "path2",
+            "x": 112,
+            "y": 590,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp102",
+            "category": "path2",
+            "x": 205,
+            "y": 570,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp103",
+            "category": "path2",
+            "x": 235,
+            "y": 490,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp104",
+            "category": "path2",
+            "x": 250,
+            "y": 410,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp105",
+            "category": "path2",
+            "x": 350,
+            "y": 400,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "bigcamp1",
+            "category": "path2",
+            "x": 485,
+            "y": 370,
+            "template": "CustomTemplates.WAYPOINT_GOLD"
+        },
+        {
+            "id": "wp107",
+            "category": "path2",
+            "x": 550,
+            "y": 285,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp108",
+            "category": "path2",
+            "x": 620,
+            "y": 265,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp109",
+            "category": "path2",
+            "x": 680,
+            "y": 210,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp110",
+            "category": "path2",
+            "x": 700,
+            "y": 150,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp111",
+            "category": "path2",
+            "x": 710,
+            "y": 90,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+
+        {
+            "id": "wp201",
+            "category": "path3",
+            "x": 425,
+            "y": 615,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp202",
+            "category": "path3",
+            "x": 483,
+            "y": 590,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp203",
+            "category": "path3",
+            "x": 545,
+            "y": 560,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp204",
+            "category": "path3",
+            "x": 600,
+            "y": 510,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp205",
+            "category": "path3",
+            "x": 625,
+            "y": 440,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "bigcamp2",
+            "category": "path3",
+            "x": 650,
+            "y": 380,
+            "template": "CustomTemplates.WAYPOINT_GOLD"
+        },
+        {
+            "id": "wp207",
+            "category": "path3",
+            "x": 723,
+            "y": 335,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp208",
+            "category": "path3",
+            "x": 790,
+            "y": 320,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp209",
+            "category": "path3",
+            "x": 860,
+            "y": 300,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp210",
+            "category": "path3",
+            "x": 885,
+            "y": 240,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+        {
+            "id": "wp211",
+            "category": "path3",
+            "x": 920,
+            "y": 190,
+            "template": "CustomTemplates.WAYPOINT_SMALL_RED"
+        },
+
+        {
+            "id": "wp301",
+            "category": "path4",
+            "x": 400,
+            "y": 350,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp302",
+            "category": "path4",
+            "x": 330,
+            "y": 325,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp303",
+            "category": "path4",
+            "x": 270,
+            "y": 270,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp304",
+            "category": "path4",
+            "x": 200,
+            "y": 215,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp305",
+            "category": "path4",
+            "x": 120,
+            "y": 230,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+
+        {
+            "id": "wp401",
+            "category": "path5",
+            "x": 723,
+            "y": 400,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp402",
+            "category": "path5",
+            "x": 790,
+            "y": 435,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp403",
+            "category": "path5",
+            "x": 860,
+            "y": 490,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp404",
+            "category": "path5",
+            "x": 940,
+            "y": 485,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        },
+        {
+            "id": "wp405",
+            "category": "path5",
+            "x": 1010,
+            "y": 420,
+            "template": "CustomTemplates.WAYPOINT_SMALL_ORANGE"
+        }
+    ]
+}

@@ -1,22 +1,22 @@
 /**
  * @Author: Nina Gundacker
- * @Date:   2017-06-04T10:48:10+02:00
+ * @Date:   2018-05-10T11:09:28+02:00
  * @Email:  nina.gundacker@nefkom.net
  * @Project: ProManGameWithFraGOLE
  * @Last modified by:   Nina Gundacker
- * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @Last modified time: 2018-05-10T11:09:28+02:00
  * @License: MIT
  * @Copyright: Nina Gundacker
  */
 
  /**
- * Gemeinsame Funktionalitäten für das ProManGame
+ * Common functionalities for ProManGame
  */
 const ProManGameTemplates = require('../content/promangame_templates.js');
 const CustomTemplates = require('../../content/custom_templates.js');
 
 /**
- * Inhaltsstring für den Shopping-Dialog
+ * Content String for the shopping dialog
  */
 const shoppingFormString = `
     <div class="field">
@@ -56,10 +56,10 @@ const shoppingFormString = `
 module.exports.shoppingFormString = shoppingFormString;
 
 /**
- * Liefert je nach bereits vorhandener Ausrüstung den Inhalts-String für den 
- * Shopping-Dialog zurueck.
- * Hat der Player z.B. schon einen Regenschirm, kann die Checkbox deaktiviert bleiben
- * sonst muss sie aktiviert werden
+ * Returns the content-String for the shopping dialog in dependency of the already existing
+ * inventories of a player.
+ * If the player already has an umbrella the checkbox can stay disabled
+ * Otherwise it has to be enabled
  * @param {ProManGamePlayer} player 
  */
 function getShoppingFormString(player) {
@@ -85,11 +85,11 @@ function getShoppingFormString(player) {
 module.exports.getShoppingFormString = getShoppingFormString;
 
 /**
- * Prüft und Berechnet die Einkäufe eines Players
- * Kauft der Player mehr ein, als er noch ProCoins übrig hat, werden keine 
- * Ausrüstungsgegenstände gut geschrieben.
- * Sind noch genügen ProCoins vorhanden, werden die Gegenstände seinem Inventory 
- * gut geschrieben und die entsprechenden ProCoins abgezogen
+ * Checks and calculates the purchase of a player
+ * If the player wants more items than he has proCoins left, no items are added to
+ * his inventory.
+ * If the player has enough proCoins left, the items are added to his inventory and
+ * the proCoins were moved from his proCoin wallet
  * @param {ProManGamePlayer} player 
  * @param {Array} data 
  */
@@ -98,7 +98,7 @@ function checkAndChargeShopping(player, data) {
     let rope = 0;
     let helmet = 0;
     let umbrella = 0;
-    //Bestandsaufnahme, was soll alles gekauft werden
+    //Inventory Control - which items does the player want to buy?
     for (let index = 0; index < data.length; index++) {
         let shoppingItem = data[index];
         if (shoppingItem.name === 'select_bottles' && shoppingItem.value !== ""){
@@ -111,14 +111,14 @@ function checkAndChargeShopping(player, data) {
             helmet = 1;
         }
     }
-    //jetzt berechnen, ob für alles noch genug Geld da ist
+    //now calculate if there are enough proCoins left
     let proCoins = player.getInventory({id: player.id + 'Money'});
     let gesamtKosten = (parseInt(anzBottles) * 1) + (rope * 3) + (umbrella * 3) + (helmet * 3);
     
-    //Kosten zu hoch, Spieler kann sich Einkauf nicht leisten
+    //Cost to high, player can not afford purchase
     if (gesamtKosten > proCoins.context.value) {
         return false;
-    //alles passt, Einkauf verbuchen und Geld entsprechend abziehen
+    //everything ok, add inventories and move proCoins from the players wallet
     } else {
         let bottles = player.getInventory({id: player.id + 'Bottles'});
         let bottlesAfter = bottles.context.value + parseInt(anzBottles);
@@ -141,27 +141,26 @@ function checkAndChargeShopping(player, data) {
 module.exports.checkAndChargeShopping = checkAndChargeShopping;
 
 /**
- * Fügt je nach Waypoint für den übergebenen Spieler Vorräte hinzu
- * oder zieht diese ab
+ * Adds or removes in dependency of waypoint items to the players inventory
  * @param {ProManGameWaypoint} wp 
  * @param {ProManGamePlayer} player 
  */
 function addOrRemoveInventory(wp, player) {
     let playerBackToStartWp = false;
-    //WASSER ABZIEHEN
+    //REMOVE WATER
     if (wp.template instanceof ProManGameTemplates.WAYPOINT_WATER) {    
-        //Bei bestimmten Wegpunkten kann der Wasserverbrauch höher sein
+        //On certain Waypoints the player has to pay extra Water 
         let noBottlesLeft;
         if (wp.extraWater) {
             noBottlesLeft = waterAdd(player, -2); 
         } else {
             noBottlesLeft = waterAdd(player, - 1);
         }
-        //Wasserprüfung durchführen, wenn kein Wasser mehr da, wieder zurück zum Anfang.
+        //Check water stock, if there is no water left, go back to start
         if (noBottlesLeft) {
             playerBackToStartWp = true;
         }
-    //PLUS PROCOINS
+    //ADD PROCOINS
     } else if (wp.template instanceof ProManGameTemplates.WAYPOINT_ADD_COINS ||
                 wp.template instanceof ProManGameTemplates.WAYPOINT_ADD_EXTRA_COINS) {     
         //Add 3 ProCoins
@@ -171,15 +170,15 @@ function addOrRemoveInventory(wp, player) {
         } else {
             proCoinsAdd(player, 10);
         }    
-    //MINUS PROCOINS - nur bei agil und Entscheidungspunkt
+    //REMOVE PROCOINS - only if player is agil and the Waypoint is a Entscheidungspunkt
     } else if (wp.template instanceof CustomTemplates.WAYPOINT_GOLD &&
                 player.agil) {
         proCoinsAdd(player, -1);
-    //MINUS oder PLUS PROCOINS - nur bei agil und Retrospektive
+    //ADD OR REMOVE PROCOINS - only if the player is agil and the waypoint is a Retrospektive-Punkt
     } else if (wp.template instanceof ProManGameTemplates.WAYPOINT_RETROSPECTIVE &&
                 player.agil) {
         console.log("ProCoins Retrospektive");
-    //Flag setzen, dass Player beim hohen Alpstein angekommen ist, vorher darf er nicht gewinnen
+    //set Flag, if player has reached the peak "Hoher Alpstein", otherwise he cannot win
     } else if (wp.template instanceof ProManGameTemplates.WAYPOINT_STOP) {
         player.hoherAlpsteinPassed = true;
     }
@@ -189,9 +188,9 @@ function addOrRemoveInventory(wp, player) {
 module.exports.addOrRemoveInventory = addOrRemoveInventory;
 
 /**
- * Fügt ProCoins zum Vorrat des übergebenen Players hinzu oder zieht diese ab.
- * Wird anzProCoins als positiver Wert übergeben = Addition
- * Wird anzProCoins als negativer Wert übergeben = Subtraktion
+ * Adds or removes ProCoins to the inventory of the delivered player
+ * if anzProCoins is positive number = add ProCoins
+ * if anzProCoins is negative number = remove ProCoins
  * @param {ProManGamePlayer} player 
  * @param {int} anzProCoins 
  */
@@ -206,11 +205,11 @@ function proCoinsAdd(player, anzProCoins) {
 module.exports.proCoinsAdd = proCoinsAdd;
 
 /**
- * Fügt Wasserflaschen zum Vorrat des übergebenen Players hinzu oder zieht diese ab.
- * Wird anzWater als positiver Wert übergeben = Addition
- * Wird anzWater als negativer Wert übergeben = Subtraktion
- * Prüft außerdem ob der Player überhaupt noch Wasserflaschen vorrätig hat und liefert
- * dieses Ergebnis als boolean Variable zurück
+ * Adds or removes WaterBottles to the inventory of the delivered player
+ * if anzWater is positive number = add WaterBottles
+ * if anzWater is negative number = remove WaterBottles
+ * Furthermore the function checks if the player has enough water bottles left 
+ * and returns this result as boolean
  * @param {ProManGamePlayer} player 
  * @param {int} anzWater 
  * @returns boolean
@@ -223,10 +222,10 @@ function waterAdd(player, anzWater) {
     player.set('bottles', bottlesAfter);
     console.log("Wasser danach: " + bottlesAfter);
 
-    //kein Wasser mehr vorrätig?
+    //no Water left?
     if (bottlesAfter > 0) {
         return false;
-    //noch Wasser vorrätig
+    //Water left
     } else {
         return true;
     }
@@ -234,7 +233,7 @@ function waterAdd(player, anzWater) {
 module.exports.waterAdd = waterAdd;
 
 /**
- * Liefert den Waypoint zurück, auf dem der aktive Spieler gerade steht
+ * Returns the waypoint of the current active player
  * @param {GameController} controller 
  * @param {String} player1_Id 
  * @returns {ProManGameWaypoint} waypoint
@@ -302,7 +301,6 @@ function getProManGameWaypointsAtRange(root, depth, player) {
                     continue;
                 }
                 currWp = tempWp;
-                //HIER BEGINN
                 //Die agilen muessen an den Waypoints GOLD anhalten
                 //bei den anderen vieren müssen alle anhalten
                 if ((player.agil && (currWp.template instanceof CustomTemplates.WAYPOINT_GOLD)) || 
@@ -312,7 +310,6 @@ function getProManGameWaypointsAtRange(root, depth, player) {
                         currWp.template instanceof CustomTemplates.WAYPOINT_GREEN) {
                     proManGameSpecial = true;
                 }
-                //HIER ENDE
                 currDepth++;
             }
         } else {

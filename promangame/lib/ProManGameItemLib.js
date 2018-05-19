@@ -1,25 +1,17 @@
 /**
  * @Author: Nina Gundacker
- * @Date:   2017-06-04T10:48:10+02:00
+ * @Date:   2018-05-10T11:09:28+02:00
  * @Email:  nina.gundacker@nefkom.net
  * @Project: ProManGameWithFraGOLE
  * @Last modified by:   Nina Gundacker
- * @Last modified time: 2017-09-03T14:40:20+02:00
+ * @Last modified time: 2018-05-19T11:09:28+02:00
  * @License: MIT
  * @Copyright: Nina Gundacker
  */
-
-const defaultFilenameRisks = "./promangame/config/risks.json";
-const defaultFilenameTasks = "./promangame/config/tasks.json";
-const defaultFilenameRetros = "./promangame/config/retros.json";
-const defaultFilenameQuestions = "./promangame/config/questions.json";
-const defaultFilenameWaypoints = "./promangame/config/waypoints.json";
-const defaultFilenameConnectWaypoints = "./promangame/config/waypointsConnect.json";
-
-const CustomTemplates = require('../../content/custom_templates.js');
 const Question = require('../../objects/Prompt.js').Question;
 const DefaultTemplates = require('../../lib/FragoleTemplates.js');
 const Lib = require('../../lib/FragoleLib.js');
+const ItemLib = require('../../lib/FragoleItemLib.js');
 
 const ProManGameRisk = require('../objects/ProManGameRisk.js').ProManGameRisk;
 const ProManGameQuestion = require('../objects/ProManGameQuestion.js').ProManGameQuestion;
@@ -29,204 +21,108 @@ const ProManGameTemplates = require('../content/promangame_templates.js');
 let usedDefaultWaypoints = false;
 
 /**
- * Liest alle Waypoints fuer das Spiel ProManGame aus einer JSON Datei aus
- * Wird kein Dateipfad uebergeben wird der defaultPfad genutzt.
- * Tritt beim Parsen ein Fehler auf, oder wird ein falscher Dateipfad uebergeben
- * werden die Standard-Waypoints aus den defaultProManGameItems zurueckgeliefert
- * @param {String} filenameWaypoints 
+ * Returns ProManGameWaypoint Objects from the given JSON content
+ * if the JSON content is undefined the default proManGameWaypoints from defaultProManGameItems are returned
+ * @param {jsonContent} jsonItemContentWaypoints 
+ * @returns associative array with ProManGameWaypoint Objects
  */
-function getProManGameWaypoints(filenameWaypoints) {      
-    let filename = filenameWaypoints;
-    if (typeof filename === 'undefined'){
-        filename = defaultFilenameWaypoints;
-    }  
-    let jsonContentWaypoints = getJSONContent(filename);
-    //wenn ein Fehler beim Parsen auftritt oder das File nicht
-    //gefunden wird, dann die defaultWaypoints zurückgeben
-    if (isInvalidJsonContent(jsonContentWaypoints, 'ProManGameWaypoint')) {
+function getProManGameWaypoints(jsonItemContentWaypoints) {      
+    if (typeof jsonItemContentWaypoints === 'undefined'){
         usedDefaultWaypoints = true;
         return defaultProManGameItems.defaultWaypoints;
     } else {
-        let risks = getProManGameWaypointObjects(jsonContentWaypoints.items);
-        return risks;    
+        let waypoints = getProManGameWaypointObjects(jsonItemContentWaypoints);
+        return waypoints;    
     }
 }
 
 /**
- * Liest alle Risikokarten fuer das Spiel ProManGame aus einer JSON Datei aus
- * Wird kein Dateipfad uebergeben wird der defaultPfad genutzt.
- * Tritt beim Parsen ein Fehler auf, oder wird ein falscher Dateipfad uebergeben
- * werden die Standard-Risikokarten aus den defaultProManGameItems zurueckgeliefert
- * @param {String} filenameRisks 
+ * Returns ProManGameRisk Objects from the given JSON content
+ * if the JSON content is undefined the default proManGameRisks from defaultProManGameItems are returned
+ * @param {jsonContent} jsonItemContentRisks 
+ * @returns associative array with ProManGameRisk Objects
  */
-function getProManGameRisks(filenameRisks) {      
-    let filename = filenameRisks;
-    if (typeof filename === 'undefined'){
-        filename = defaultFilenameRisks;
-    }  
-    let jsonContentRisks = getJSONContent(filename);
-    //wenn ein Fehler beim Parsen auftritt oder das File nicht
-    //gefunden wird, dann die defaultRisks zurückgeben
-    if (isInvalidJsonContent(jsonContentRisks, 'ProManGameRisk')) {
+function getProManGameRisks(jsonItemContentRisks) {      
+    if (typeof jsonItemContentRisks === 'undefined'){
         return defaultProManGameItems.defaultRisks;
     } else {
-        let risks = getProManGameRiskObjects(jsonContentRisks.items);
+        let risks = getProManGameRiskObjects(jsonItemContentRisks);
         return risks;    
     }
 }
 
 /**
- * Liest alle Tasks fuer das Spiel ProManGame aus einer JSON Datei aus
- * Wird kein Dateipfad uebergeben wird der defaultPfad genutzt.
- * Tritt beim Parsen ein Fehler auf, oder wird ein falscher Dateipfad uebergeben
- * werden die Standard-Tasks aus den defaultProManGameItems zurueckgeliefert
- * @param {String} filenameTasks 
+ * Returns ProManGameTask Objects (Question) from the given JSON content
+ * if the JSON content is undefined the defaultTasks from defaultProManGameItems are returned
+ * @param {jsonContent} jsonItemContentTasks 
+ * @returns associative array with Question Objects
  */
-function getProManGameTasks(filenameTasks) {      
-    let filename = filenameTasks;
-    if (typeof filename === 'undefined'){
-        filename = defaultFilenameTasks;
-    }  
-    let jsonContentTasks = getJSONContent(filename);
-    //wenn ein Fehler beim Parsen auftritt oder das File nicht
-    //gefunden wird, dann die defaultTasks zurückgeben
-    if (isInvalidJsonContent(jsonContentTasks, 'Question')) {
+function getProManGameTasks(jsonItemContentTasks) {      
+    if (typeof jsonItemContentTasks === 'undefined'){
         return defaultProManGameItems.defaultTasks;
     } else {
-        let tasks = getQuestionObjects(jsonContentTasks.items);
-        return tasks;
-       
+        let tasks = ItemLib.getQuestionObjects(jsonItemContentTasks);
+        return tasks; 
     }
 }
 
 /**
- * Liest alle Retros fuer das Spiel ProManGame aus einer JSON Datei aus
- * Wird kein Dateipfad uebergeben wird der defaultPfad genutzt.
- * Tritt beim Parsen ein Fehler auf, oder wird ein falscher Dateipfad uebergeben
- * werden die Standard-Retros aus den defaultProManGameItems zurueckgeliefert
- * @param {String} filenameRetros 
+ * Returns ProManGameRetro Objects (Question) from the given JSON content
+ * if the JSON content is undefined the defaultRetros from defaultProManGameItems are returned
+ * @param {jsonContent} jsonItemContentRetros 
+ * @returns associative array with Question Objects
  */
-function getProManGameRetros(filenameRetros) {      
-    let filename = filenameRetros;
-    if (typeof filename === 'undefined'){
-        filename = defaultFilenameRetros;
-    }  
-    let jsonContentRetros = getJSONContent(filename);
-    //wenn ein Fehler beim Parsen auftritt oder das File nicht
-    //gefunden wird, dann die defaultRetros zurückgeben
-    if (isInvalidJsonContent(jsonContentRetros, 'Question')) {
+function getProManGameRetros(jsonItemContentRetros) {      
+    if (typeof jsonItemContentRetros === 'undefined'){
         return defaultProManGameItems.defaultRetros;
-    } else {
-        let retros = getQuestionObjects(jsonContentRetros.items);
+    }  else {
+        let retros = ItemLib.getQuestionObjects(jsonItemContentRetros);
         return retros;      
     }
 }
 
 /**
- * Liest alle ProManGameQuestions fuer das Spiel ProManGame aus einer JSON Datei aus
- * Wird kein Dateipfad uebergeben wird der defaultPfad genutzt.
- * Tritt beim Parsen ein Fehler auf, oder wird ein falscher Dateipfad uebergeben
- * werden die Standard-ProManGameQuestions aus den defaultProManGameItems zurueckgeliefert
- * @param {String} filenameQuestions 
+ * Returns ProManGameQuestion Objects from the given JSON content
+ * if the JSON content is undefined the defaultQuestions from defaultProManGameItems are returned
+ * @param {jsonContent} jsonItemContentProManGameQuestions 
+ * @returns associative array with ProManGameQuestion Objects
  */
-function getProManGameQuestions(filenameQuestions) {
-    let filename = filenameQuestions;
-    if (typeof filenmae === 'undefined'){
-        filename = defaultFilenameQuestions;
-    }
-    let jsonContentQuestions = getJSONContent(filename);
-    //wenn ein Fehler beim Parsen auftritt oder das File nicht
-    //gefunden wird, dann die defaultQuestions zurückgeben
-    if (isInvalidJsonContent(jsonContentQuestions, 'ProManGameQuestion')) {
+function getProManGameQuestions(jsonItemContentProManGameQuestions) {
+    if (typeof jsonItemContentProManGameQuestions === 'undefined'){
         return defaultProManGameItems.defaultQuestions;
     } else {
-        let questions = getProManGameQuestionObjects(jsonContentQuestions.items);
+        let questions = getProManGameQuestionObjects(jsonItemContentProManGameQuestions);
         return questions;
     }
 }
 
 /**
- * Verbindet alle Waypoints auf dem Spielfeld miteinander
+ * Connects all ProManGameWaypoints on the gameboard with each other
  * @param {ProManGameWaypoints} wps 
  * @param {String} filenameConnectWaypoints 
  */
-function connectWaypoints(wps, filenameConnectWaypoints) {
+function connectProManGameWaypoints(wps, jsonItemContentConnectWaypoints) {
     if (usedDefaultWaypoints) {
         defaultProManGameItems.defaultConnectWaypoints(wps);
+    } else if (typeof jsonItemContentConnectWaypoints === 'undefined') {
+        console.log(`Es wurden Wapoints in einer JSON Datei definiert aber keine WaypointConnects.
+                    Die Wegpunkte werden nicht miteinander verbunden.`);
     } else {
-        let filename = filenameConnectWaypoints;
-        if (typeof filename === 'undefined'){
-            filename = defaultFilenameConnectWaypoints;
-        }  
-        let jsonContentConnectWaypoints = getJSONContent(filename);
-        if (isInvalidJsonContent(jsonContentConnectWaypoints, 'WaypointConnect')) {
-            return "Fehler beim Parsen der JSON-Connect-Waypoints-Datei. Bitte Format überprüfen";
-        } else {
-            connectPaths(wps);
-            connectSingleWaypoints(jsonContentConnectWaypoints.items, wps);
-        }
+        ItemLib.connectPaths(wps);
+        ItemLib.connectSingleWaypoints(jsonItemContentConnectWaypoints, wps);
     }
 }
 
 /**
- * Connects all Waypoints of the same category
- * @param {ProManGameWaypoints} wps 
+ * Parses the waypoints in JSON Notation to regular ProManGameWaypoint Objects
+ * @param {JSON Content} items 
+ * @returns associative array with ProManGameWaypoint Objects
  */
-function connectPaths(wps) {
-    //Pfadangaben ermitteln + Waypoints entsprechendem Array zuordnen
-    let paths = {};
-    for (let wp in wps) {
-        let waypoint = wps[wp];
-        if (paths[waypoint.category] instanceof Array) {
-            paths[waypoint.category].push(waypoint);
-        } else {
-            paths[waypoint.category]=[waypoint];
-        }
-    }
-    //Die Pfade connecten
-    for (path in paths) {
-        Lib.connectWaypoints(paths[path], true);
-    }
-}
-
-/**
- * Connects single Waypoints e.g. to connect different paths with
- * each other
- * @param {WaypointsConnects} items in JSON Format
- * @param {Waypoints} wps 
- */
-function connectSingleWaypoints(items, wps) {
-    for (let i = 0; i < items.length; i++){
-        let connect = items[i];
-        let from = connect.wpFromId;
-        let to = connect.wpToId;
-        Lib.connectWaypoints([wps[from], wps[to]], true);
-    }
-}
-
-/**
- * Reads the content of a JSON-File and is parsing the content
- * @param {String} filename 
- * @returns content of JSON-File or errorMessage
- */
-function getJSONContent(filename) {
-    let fs = require("fs");
-    let jsonContent;
-    try {
-        // Get content from file
-        let contents = fs.readFileSync(filename);
-        jsonContent = JSON.parse(contents);
-    } catch (e) {
-        jsonContent = "parsingError " + e.message;
-    }   
-    return jsonContent;
-}
-
 function getProManGameWaypointObjects(items){
     let waypoints = {};
     for (let i = 0; i < items.length; i++) {
         let waypoint = items[i];
-        let template = convertWaypointTemplate(waypoint);
+        let template = convertProManGameWaypointTemplate(waypoint);
         let myWaypoint = new ProManGameWaypoint(waypoint.id, waypoint.category, waypoint.x, waypoint.y,
                                                 waypoint.agil, waypoint.startZiel, waypoint.extraWater,
                                                 waypoint.shopping, template);
@@ -235,6 +131,11 @@ function getProManGameWaypointObjects(items){
     return waypoints;
 }
 
+/**
+ * Parses the waypoints in JSON Notation to regular ProManGameRisk Objects
+ * @param {JSON Content} items 
+ * @returns associative array with ProManGameRisk Objects
+ */
 function getProManGameRiskObjects(items){  
     let risks = {};
     for (let i = 0; i < items.length; i++) {
@@ -245,16 +146,11 @@ function getProManGameRiskObjects(items){
     return risks;
 } 
 
-function getQuestionObjects(items){
-    let questions = {};
-    for (let i = 0; i < items.length; i++) {
-        let question = items[i];
-        let myQuestion = new Question(question.id, question.header, question.content, question.image, question.actions[0]);
-        questions[question.id] = myQuestion;
-    }
-    return questions;
-}
-
+/**
+ * Parses the waypoints in JSON Notation to regular ProManGameQuestion Objects
+ * @param {JSON Content} items 
+ * @returns associative array with ProManGameQuestion Objects
+ */
 function getProManGameQuestionObjects(items){
     let questions = {};
     for (let i = 0; i < items.length; i++) {
@@ -265,60 +161,38 @@ function getProManGameQuestionObjects(items){
     return questions;
 }
 
-function isInvalidJsonContent(jsonContent, objectString){
-    if ((isString(jsonContent) &&
-        jsonContent.startsWith('parsingError')) ||
-        jsonContent.object !== objectString) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function isString(s) {
-    return typeof(s) === 'string' || s instanceof String;
-}
-
 /**
- * Konvertiert den uebergebenen JSON-Waypoint-Template-String in die entsprechende
- * Template Klasse
- * @param {ProManGameWaypoint} waypoint in der JSON-Notation
+ * Convertes the given JSON-Waypoint-String to its matching template Class
+ * @param {ProManGameWaypoint} waypoint in JSON notation
  */
-function convertWaypointTemplate(waypoint) {
-    let template = waypoint.template.split('.');
-    if (ProManGameTemplates.WAYPOINT_ADD_COINS.name === template[1]){
-        return ProManGameTemplates.WAYPOINT_ADD_COINS;
-    } else if (ProManGameTemplates.WAYPOINT_NORMAL.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_NORMAL;
-    } else if (ProManGameTemplates.WAYPOINT_ADD_EXTRA_COINS.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_ADD_EXTRA_COINS;
-    } else if (ProManGameTemplates.WAYPOINT_RETROSPECTIVE.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_RETROSPECTIVE;
-    } else if (ProManGameTemplates.WAYPOINT_RISK.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_RISK;
-    } else if (ProManGameTemplates.WAYPOINT_STOP.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_STOP;
-    } else if (ProManGameTemplates.WAYPOINT_TASK.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_TASK;
-    } else if (ProManGameTemplates.WAYPOINT_WATER.name === template[1]) {
-        return ProManGameTemplates.WAYPOINT_WATER;
-    } else if (CustomTemplates.WAYPOINT_GREEN.name === template[1]) {
-        return CustomTemplates.WAYPOINT_GREEN;
-    } else if (CustomTemplates.WAYPOINT_GOLD.name === template[1]) {
-        return CustomTemplates.WAYPOINT_GOLD;
-    } else if (CustomTemplates.WAYPOINT_LIGHT_BLUE.name === template[1]) {
-        return CustomTemplates.WAYPOINT_LIGHT_BLUE;
-    } else if (CustomTemplates.WAYPOINT_ORANGE.name === template[1]) {
-        return CustomTemplates.WAYPOINT_ORANGE;
-    } else if (CustomTemplates.WAYPOINT_SMALL_ORANGE.name === template[1]) {
-        return CustomTemplates.WAYPOINT_SMALL_ORANGE;
-    } else if (CustomTemplates.WAYPOINT_SMALL_RED.name === template[1]) {
-        return CustomTemplates.WAYPOINT_SMALL_RED;
-    } else if (CustomTemplates.WAYPOINT_SMALL_WHITE.name === template[1]) {
-        return CustomTemplates.WAYPOINT_SMALL_WHITE;
-    //es passt gar nichts? Dann das Standard-Waypoint-Template zurueckgeben
-    } else {
+function convertProManGameWaypointTemplate(waypoint) {
+    let index = waypoint.template.indexOf('.') + 1;
+    let templateString = waypoint.template.substring(index);
+    //erst mit den Standard-Fragole-Templates probieren
+    let tempTemplate = ItemLib.convertWaypointTemplate(templateString, false);
+    if (typeof tempTemplate === 'undefined') {
+        if (ProManGameTemplates.WAYPOINT_ADD_COINS.name === templateString){
+            return ProManGameTemplates.WAYPOINT_ADD_COINS;
+        } else if (ProManGameTemplates.WAYPOINT_NORMAL.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_NORMAL;
+        } else if (ProManGameTemplates.WAYPOINT_ADD_EXTRA_COINS.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_ADD_EXTRA_COINS;
+        } else if (ProManGameTemplates.WAYPOINT_RETROSPECTIVE.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_RETROSPECTIVE;
+        } else if (ProManGameTemplates.WAYPOINT_RISK.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_RISK;
+        } else if (ProManGameTemplates.WAYPOINT_STOP.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_STOP;
+        } else if (ProManGameTemplates.WAYPOINT_TASK.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_TASK;
+        } else if (ProManGameTemplates.WAYPOINT_WATER.name === templateString) {
+            return ProManGameTemplates.WAYPOINT_WATER;
+        //nothing matches? then return WAYPOINT_DEFAULT Template
+        } else {
         return DefaultTemplates.WAYPOINT_DEFAULT;
+        }
+    } else {
+        return tempTemplate;
     }
 }
 
@@ -328,5 +202,5 @@ module.exports = {
     getProManGameTasks: getProManGameTasks,
     getProManGameRetros: getProManGameRetros,
     getProManGameQuestions: getProManGameQuestions,
-    connectWaypoints: connectWaypoints,
+    connectProManGameWaypoints: connectProManGameWaypoints,
 }
