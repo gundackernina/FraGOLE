@@ -12,9 +12,9 @@ const FragoleServer = require('./lib/FragoleServer.js');
 const Lib = require('./lib/FragoleLib.js');
 const ItemLib = require('./lib/FragoleItemLib.js');
 const {Game, GameController, GameState, Player, PlayerToken, Collection,
-       Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
-       Progress, PlayerProgress, Prompt, Question, Card, CardStack, CardHand,
-       Button, Form} = require('./objects/FragoleObjects.js');
+    Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
+    Progress, PlayerProgress, Prompt, Question, Card, CardStack, CardHand,
+    Button, Form} = require('./objects/FragoleObjects.js');
 const Lobby = require('./lib/FragoleLobby.js');
 const Templates = require('./lib/FragoleTemplates.js');
 const CustomTemplates = require('./content/custom_templates.js');
@@ -29,8 +29,8 @@ const ProManGameTemplates = require('./promangame/content/promangame_templates.j
 const ProManGameLib = require('./promangame/lib/ProManGameLib.js');
 const ProManGameItemLib = require('./promangame/lib/ProManGameItemLib.js');
 
-const player1_Id = 'Player1';
-const player2_Id = 'Player2'; 
+const player1Id = 'Player1';
+const player2Id = 'Player2'; 
 let onePlayerFinished = false;
 
 // ****************************************************************************
@@ -67,8 +67,8 @@ let STATE_CHOOSE_ACTION = new GameState('STATE_CHOOSE_ACTION');
 
 
 //Der erste Player ist agil, der zweite nicht
-let players = {player1: new ProManGamePlayer(player1_Id, true),
-    player2: new ProManGamePlayer(player2_Id, false),
+let players = {player1: new ProManGamePlayer(player1Id, true),
+    player2: new ProManGamePlayer(player2Id, false),
 };
 
 let tokens = {playerToken1: new PlayerToken('PlayerToken1', 'playertokens', 177, 450),
@@ -91,7 +91,7 @@ let equipment = {
     player2Helmet: new PlayerStatistic('Player2Helmet', 'HELM', false, 'chess queen'),
     player1Rope: new PlayerStatistic('Player1Rope', 'SEIL', false, 'linkify'),
     player2Rope: new PlayerStatistic('Player2Rope', 'SEIL', false, 'linkify'),
-}
+};
 
 let buttons = {
     btnWissenskarte : new Button('btnKnowledge', 10, 10, 'Wissenskarte ziehen und beantworten', 'green'),
@@ -106,36 +106,38 @@ let prompts = {
         '<p>Du kannst eine von folgenden Aktionen ausführen:</p>',
         null,
         {
+            // eslint-disable-next-line quote-props
             'Einkaufen':{color:'teal', icon:'shopping cart'},
             'Spielzug beenden':{color:'green', icon:'check'},
+            // eslint-disable-next-line quote-props
             'Aussetzen':{color:'yellow', icon:'coffee'},
         }),
-}
+};
 
 let stacks =  {
-     proManGameRiskStack: new ProManGameStack('riskStack'),
-     proManGameQuestionStack: new ProManGameQuestionStack('questionStack'),
-     proManGameTaskStack: new ProManGameStack('taskStack'),
-     proManGameRetroStack: new ProManGameStack('retroStack'),
-}
+    proManGameRiskStack: new ProManGameStack('riskStack'),
+    proManGameQuestionStack: new ProManGameQuestionStack('questionStack'),
+    proManGameTaskStack: new ProManGameStack('taskStack'),
+    proManGameRetroStack: new ProManGameStack('retroStack'),
+};
 
 //Erst mal leer initialisieren, der String wird dann hineingesetzt
 const shoppingForm = new Form('shoppingForm', 'Ausrüstung einkaufen', '');
 
 // add (potential) players to the gameController
 game.gameControllers[0].addPlayer(players.player1)
-                       .addPlayer(players.player2);
+    .addPlayer(players.player2);
 
 let lobby = new Lobby(controller);
 
 
 STATE_INIT.setHandlers({
     enter:  (src) => {
-        let wps = ProManGameItemLib.getProManGameWaypoints(configContentFiles["ProManGameWaypoint"]);
-        let risks = ProManGameItemLib.getProManGameRisks(configContentFiles["ProManGameRisk"]);
-        let questions = ProManGameItemLib.getProManGameQuestions(configContentFiles["ProManGameQuestion"]);
-        let tasks = ProManGameItemLib.getProManGameTasks(configContentFiles["ProManGameTask"]);
-        let retros = ProManGameItemLib.getProManGameRetros(configContentFiles["ProManGameRetro"]);
+        let wps = ProManGameItemLib.getProManGameWaypoints(configContentFiles['ProManGameWaypoint']);
+        let risks = ProManGameItemLib.getProManGameRisks(configContentFiles['ProManGameRisk']);
+        let questions = ProManGameItemLib.getProManGameQuestions(configContentFiles['ProManGameQuestion']);
+        let tasks = ProManGameItemLib.getProManGameTasks(configContentFiles['ProManGameTask']);
+        let retros = ProManGameItemLib.getProManGameRetros(configContentFiles['ProManGameRetro']);
         stacks.proManGameRiskStack.addProManGameItems(risks);
         stacks.proManGameRiskStack.shuffle();
         stacks.proManGameQuestionStack.addProManGameItems(questions);
@@ -145,7 +147,7 @@ STATE_INIT.setHandlers({
         stacks.proManGameRetroStack.addProManGameItems(retros);
         stacks.proManGameRetroStack.shuffle();
 
-        // init the controller with all items
+        // Controller mit allen Items initialisieren
         src.addItems(players);
         src.addItems(stats);
         src.addItems(equipment);
@@ -160,7 +162,7 @@ STATE_INIT.setHandlers({
         src.addItems(prompts);
         src.addItems({shoppingForm});
 
-        // init player inventories
+        // Ausrüstung für Player initialisieren
         let items = src.items;
         //Statistik + Token
         items.player1.addInventoryEx([items.playerToken1, items.player1Stat]);
@@ -194,12 +196,12 @@ STATE_INIT.setHandlers({
         items.playerToken1.waypoint = items.wpStartZiel;
         items.playerToken2.waypoint = items.wpStartZiel;
 
-        ProManGameItemLib.connectProManGameWaypoints(wps, configContentFiles["WaypointConnect"]);
+        ProManGameItemLib.connectProManGameWaypoints(wps, configContentFiles['WaypointConnect']);
         
         for (let p of src.joinedPlayers) {
             console.log(p.name);
-            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles["BackgroundImage"]));
-        };
+            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles['BackgroundImage']));
+        }
 
         //alles zeichnen lassen
         src.setupBoard();
@@ -223,11 +225,12 @@ STATE_SHOPPING.setHandlers({
         // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.playersId[clientId];
+        let shopForm;
         
         switch(id) {
             case 'btnShopping':
                 controller.items.btnShopping.deactivate();
-                let shopForm = controller.items.shoppingForm;
+                shopForm = controller.items.shoppingForm;
                 shopForm.context.content = ProManGameLib.getShoppingFormString(player);
                 shopForm.show(player);
                 break;
@@ -252,7 +255,7 @@ STATE_SHOPPING.setHandlers({
         } else {
             let ok = ProManGameLib.checkAndChargeShopping(player, data);  
             //Popup ausgeben, dass man nicht mehr so viel Geld hat um alles zu kaufen
-            if (!ok){
+            if (!ok) {
                 controller.sendPopup({
                     header:'Auswahl anpassen',
                     msg:'Nicht genug ProCoins, um alles zu kaufen.',
@@ -269,7 +272,6 @@ STATE_SHOPPING.setHandlers({
             player.firstShoppingCall = false;
             controller.nextState(STATE_NEXT_PLAYER);
         }
-
     },
 
     formCancel: (id, data, form, clientId) => {
@@ -288,7 +290,6 @@ STATE_SHOPPING.setHandlers({
             controller.nextState(STATE_NEXT_PLAYER);
         }
         form.gameController.sendLog(player.name, {content:'hat die Formulareingabe abgebrochen', icon:'inverted red edit outline'});
-
     },
 
     exit: () => {
@@ -309,12 +310,13 @@ STATE_KNOWLEDGE.setHandlers({
         // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.playersId[clientId];
+        let category = 'Test';
+        let question; 
         
         switch(id) {
             case 'btnKnowledge':
                 controller.items.btnWissenskarte.deactivate();
-                let category = 'Test'
-                let question = controller.items.proManGameQuestionStack.getProManGameQuestion(category);
+                question = controller.items.proManGameQuestionStack.getProManGameQuestion(category);
                 question.show(player);
                 break;
             default:
@@ -352,12 +354,13 @@ STATE_RISK.setHandlers({
         // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.activePlayer;
-        
+        let risk;
+
         switch(id) {
             case 'btnRisk':
                 controller.items.btnRisikokarte.deactivate();
                 //zufaellig eine Karte holen
-                let risk = controller.items.proManGameRiskStack.getProManGameStackItem();
+                risk = controller.items.proManGameRiskStack.getProManGameStackItem();
                 risk.show(player);
                 break;
             default:
@@ -367,7 +370,7 @@ STATE_RISK.setHandlers({
 
     //Normales Aussetzen
     skip: (id, option, value, risk, clientId) => {
-        console.log("played skip card");
+        console.log('played skip card');
         let player = risk.gameController.playersId[clientId];
         player.skipTurns = value;
         controller.nextState(STATE_NEXT_PLAYER);
@@ -375,7 +378,7 @@ STATE_RISK.setHandlers({
 
     //Vorwärts oder Rückwärts ziehen
     forwardOrBackward: (id, option, value, risk, clientId) => {
-        console.log("played forward/backward card");
+        console.log('played forward/backward card');
         let player = risk.gameController.playersId[clientId];
         controller.set('roll_result', value);
         controller.nextState(STATE_SELECT_WAYPOINT);
@@ -383,7 +386,7 @@ STATE_RISK.setHandlers({
 
     //Wasser hergeben oder bekommen
     water: (id, option, value, risk, clientId) => {
-        console.log("played water card");
+        console.log('played water card');
         let player = risk.gameController.playersId[clientId];
         ProManGameLib.waterAdd(player, value);
         controller.nextState(STATE_NEXT_PLAYER);
@@ -391,7 +394,7 @@ STATE_RISK.setHandlers({
     
     //proCoins hergeben oder bekommen
     proCoins: (id, option, value, risk, clientId) => {
-        console.log("played proCoins card");
+        console.log('played proCoins card');
         let player = risk.gameController.playersId[clientId];
         ProManGameLib.proCoinsAdd(player, value);
         controller.nextState(STATE_NEXT_PLAYER);
@@ -400,7 +403,7 @@ STATE_RISK.setHandlers({
     //entweder alles ok, oder aussetzen, weil Player keinen 
     //Regenschirm hat
     noUmbrella: (id, option, value, risk, clientId) => {
-        console.log("played noUmbrella card");
+        console.log('played noUmbrella card');
         let player = risk.gameController.playersId[clientId];
         let umbrella = player.getInventory({id: player.id + 'Umbrella'});
         if (umbrella.context.value === false) {
@@ -412,7 +415,7 @@ STATE_RISK.setHandlers({
     //entweder alles ok, oder aussetzen, weil Player kein 
     //Seil hat
     noRope: (id, option, value, risk, clientId) => {
-        console.log("played noRope card");
+        console.log('played noRope card');
         let player = risk.gameController.playersId[clientId];
         let rope = player.getInventory({id: player.id + 'Rope'});
         if (rope.context.value === false) {
@@ -424,7 +427,7 @@ STATE_RISK.setHandlers({
     //entweder alles ok, oder aussetzen, weil Player keinen
     //Helm hat
     noHelmet: (id, option, value, risk, clientId) => {
-        console.log("played noHelmet card");
+        console.log('played noHelmet card');
         let player = risk.gameController.playersId[clientId];
         let helmet = player.getInventory({id: player.id + 'Helmet'});
         if (helmet.context.value === false) {
@@ -435,7 +438,7 @@ STATE_RISK.setHandlers({
 
     //Zurueck zum Start
     backToStart: (id, option, value, risk, clientId) => {
-        console.log("played backToStart card");
+        console.log('played backToStart card');
         controller.nextState(STATE_BACK_TO_START);
     },
 });
@@ -454,11 +457,12 @@ STATE_TASK.setHandlers({
         // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.activePlayer;
+        let task;
         
         switch(id) {
             case 'btnTask':
                 controller.items.btnAufgabe.deactivate();
-                let task = controller.items.proManGameTaskStack.getProManGameStackItem();
+                task = controller.items.proManGameTaskStack.getProManGameStackItem();
                 //TODO: Aufgabe beiden Playern anzeigen
                 task.show(player);
                 break;
@@ -501,11 +505,12 @@ STATE_RETROSPECTIVE.setHandlers({
         // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.activePlayer;
+        let retro;
         
         switch(id) {
             case 'btnRetro':
                 controller.items.btnRetro.deactivate();
-                let retro = controller.items.proManGameRetroStack.getProManGameStackItem();
+                retro = controller.items.proManGameRetroStack.getProManGameStackItem();
                 retro.show(player);    
                 break;
             default:
@@ -538,7 +543,7 @@ STATE_SELECT_WAYPOINT.setHandlers({
         let playToken = controller.activePlayer.getInventory({category:'playertokens'})[0];
         let valuePoints = controller.get('roll_result');
         let wps = ProManGameLib.getProManGameWaypointsAtRange(playToken.waypoint, valuePoints, 
-                                                                controller.activePlayer);
+            controller.activePlayer);
         if (wps.size > 0) {
             controller.set('wps', wps);
             for (let wp of controller.get('wps')) {
@@ -557,22 +562,22 @@ STATE_SELECT_WAYPOINT.setHandlers({
         }
     },
 
-     passWaypoint: (id, clientId, wp) => {
-        console.log("Passiere einen Wegpunkt");
+    passWaypoint: (id, clientId, wp) => {
+        console.log('Passiere einen Wegpunkt');
         let player = controller.activePlayer;
         let noMoreWaterLeft = ProManGameLib.addOrRemoveInventory(wp, player);
         controller.set('noMoreWater', noMoreWaterLeft);
-     },
+    },
 
     enterWaypoint: (id, wp, item, clientId) => {
         //hier auf den naechsten State switchen
         item.gameController.sendLog(item.owner.name, {content:'erreicht ' + wp.id +'!', icon:'inverted yellow location arrow'});
         //Prüfen ob aktueller Spieler sich nun im Ziel befindet
-        let currentWaypoint = ProManGameLib.getActivePlayerWaypoint(controller, player1_Id);
+        let currentWaypoint = ProManGameLib.getActivePlayerWaypoint(controller, player1Id);
         //SPIEL BEENDET?
         if (currentWaypoint.template instanceof CustomTemplates.WAYPOINT_GREEN &&
-            controller.activePlayer.hoherAlpsteinPassed){
-            console.log("Spiel wird beendet");
+            controller.activePlayer.hoherAlpsteinPassed) {
+            console.log('Spiel wird beendet');
             controller.nextState(STATE_FINISH);
         //SPIEL GEHT WEITER
         } else {
@@ -609,10 +614,10 @@ STATE_NEXT_PLAYER.setHandlers({
         controller.nextPlayer();
         //falls der jetzige Player, das Spiel schon beendet hat, 
         //noch mal eins weiter schalten
-        if (controller.activePlayer.finished){
+        if (controller.activePlayer.finished) {
             controller.nextPlayer();
         }
-        currentWaypoint = ProManGameLib.getActivePlayerWaypoint(controller, player1_Id);
+        let currentWaypoint = ProManGameLib.getActivePlayerWaypoint(controller, player1Id);
         let currentTemplate = currentWaypoint.template;
         //Risikopunkt => nächster State: RISK
         if (currentTemplate instanceof ProManGameTemplates.WAYPOINT_RISK) {
@@ -627,7 +632,6 @@ STATE_NEXT_PLAYER.setHandlers({
         } else {
             controller.nextState(STATE_KNOWLEDGE);
         }
-
     }, 
 });
 
@@ -642,18 +646,18 @@ STATE_FINISH.setHandlers({
             players:player, x:150, y:100, color:'green'});
         //Es sind noch nicht alle Player im Ziel angekommen
         if (!onePlayerFinished) {
-            PorManGameLib.proCoinsAdd(player, 15);
+            ProManGameLib.proCoinsAdd(player, 15);
             player.finished = true;
-            onePlayerFinshed = true;
+            onePlayerFinished = true;
             controller.nextState(STATE_NEXT_PLAYER);
         //Es sind alle im Ziel angekommen, Gewinner wird ermittelt
         } else {
-            let proCoinsPlayer1 = controller.player1.getInventory({id: player1_Id + 'Money'});
-            let proCoinsPlayer2 = controller.player2.getInventory({id: player2_Id + 'Money'});
-            let message = "";
+            let proCoinsPlayer1 = controller.player1.getInventory({id: player1Id + 'Money'});
+            let proCoinsPlayer2 = controller.player2.getInventory({id: player2Id + 'Money'});
+            let message = '';
             if (proCoinsPlayer1.context.value > proCoinsPlayer2.context.value) {
                 message = 'Player 1 gewinnt das Spiel!';
-            } else if (proCoinsPlayer1.context.value == proCoinsPlayer2.context.value){
+            } else if (proCoinsPlayer1.context.value == proCoinsPlayer2.context.value) {
                 message = 'Unentschieden!';
             } else {
                 message = 'Player 2 gewinnt das Spiel!';
@@ -681,10 +685,10 @@ STATE_BACK_TO_START.setHandlers({
         //er kann nämlich auch per Risiko-Karte auf den Start gesetzt werden
         if (playerNoWater) {
             controller.sendPopup({
-            header:'Kein Wasser mehr',
-            msg:'Ihr habt kein Wasser mehr! Es geht zurück zum Start.',
-            icon:'warning circle',
-            players:player, x:150, y:100, color:'red'});
+                header:'Kein Wasser mehr',
+                msg:'Ihr habt kein Wasser mehr! Es geht zurück zum Start.',
+                icon:'warning circle',
+                players:player, x:150, y:100, color:'red'});
         }
         player.getInventory({category:'playertokens'})[0].moveToWaypoint(controller.items.wpStartZiel);
         controller.nextState(STATE_SHOPPING);     
@@ -715,8 +719,9 @@ STATE_CHOOSE_ACTION.setHandlers({
                 ProManGameLib.proCoinsAdd(controller.activePlayer, 3);
                 controller.activePlayer.skipTurns = 1;
                 controller.nextState(STATE_NEXT_PLAYER);
-        default:
-            break;
+                break;
+            default:
+                break;
         }
     },
 });

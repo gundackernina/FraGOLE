@@ -27,7 +27,7 @@ let usedDefaultWaypoints = false;
  * @returns associative array with ProManGameWaypoint Objects
  */
 function getProManGameWaypoints(jsonItemContentWaypoints) {      
-    if (typeof jsonItemContentWaypoints === 'undefined'){
+    if (typeof jsonItemContentWaypoints === 'undefined') {
         usedDefaultWaypoints = true;
         return defaultProManGameItems.defaultWaypoints;
     } else {
@@ -43,7 +43,7 @@ function getProManGameWaypoints(jsonItemContentWaypoints) {
  * @returns associative array with ProManGameRisk Objects
  */
 function getProManGameRisks(jsonItemContentRisks) {      
-    if (typeof jsonItemContentRisks === 'undefined'){
+    if (typeof jsonItemContentRisks === 'undefined') {
         return defaultProManGameItems.defaultRisks;
     } else {
         let risks = getProManGameRiskObjects(jsonItemContentRisks);
@@ -58,7 +58,7 @@ function getProManGameRisks(jsonItemContentRisks) {
  * @returns associative array with Question Objects
  */
 function getProManGameTasks(jsonItemContentTasks) {      
-    if (typeof jsonItemContentTasks === 'undefined'){
+    if (typeof jsonItemContentTasks === 'undefined') {
         return defaultProManGameItems.defaultTasks;
     } else {
         let tasks = ItemLib.getQuestionObjects(jsonItemContentTasks);
@@ -73,7 +73,7 @@ function getProManGameTasks(jsonItemContentTasks) {
  * @returns associative array with Question Objects
  */
 function getProManGameRetros(jsonItemContentRetros) {      
-    if (typeof jsonItemContentRetros === 'undefined'){
+    if (typeof jsonItemContentRetros === 'undefined') {
         return defaultProManGameItems.defaultRetros;
     }  else {
         let retros = ItemLib.getQuestionObjects(jsonItemContentRetros);
@@ -88,7 +88,7 @@ function getProManGameRetros(jsonItemContentRetros) {
  * @returns associative array with ProManGameQuestion Objects
  */
 function getProManGameQuestions(jsonItemContentProManGameQuestions) {
-    if (typeof jsonItemContentProManGameQuestions === 'undefined'){
+    if (typeof jsonItemContentProManGameQuestions === 'undefined') {
         return defaultProManGameItems.defaultQuestions;
     } else {
         let questions = getProManGameQuestionObjects(jsonItemContentProManGameQuestions);
@@ -118,14 +118,14 @@ function connectProManGameWaypoints(wps, jsonItemContentConnectWaypoints) {
  * @param {JSON Content} items 
  * @returns associative array with ProManGameWaypoint Objects
  */
-function getProManGameWaypointObjects(items){
+function getProManGameWaypointObjects(items) {
     let waypoints = {};
     for (let i = 0; i < items.length; i++) {
         let waypoint = items[i];
         let template = convertProManGameWaypointTemplate(waypoint);
-        let myWaypoint = new ProManGameWaypoint(waypoint.id, waypoint.category, waypoint.x, waypoint.y,
-                                                waypoint.agil, waypoint.startZiel, waypoint.extraWater,
-                                                waypoint.shopping, template);
+        let myWaypoint = new ProManGameWaypoint(waypoint.id, waypoint.category, 
+            waypoint.x, waypoint.y, waypoint.agil, waypoint.startZiel, 
+            waypoint.extraWater, waypoint.shopping, template);
         waypoints[waypoint.id] = myWaypoint;
     }
     return waypoints;
@@ -136,7 +136,7 @@ function getProManGameWaypointObjects(items){
  * @param {JSON Content} items 
  * @returns associative array with ProManGameRisk Objects
  */
-function getProManGameRiskObjects(items){  
+function getProManGameRiskObjects(items) {  
     let risks = {};
     for (let i = 0; i < items.length; i++) {
         let risk = items[i];
@@ -151,7 +151,7 @@ function getProManGameRiskObjects(items){
  * @param {JSON Content} items 
  * @returns associative array with ProManGameQuestion Objects
  */
-function getProManGameQuestionObjects(items){
+function getProManGameQuestionObjects(items) {
     let questions = {};
     for (let i = 0; i < items.length; i++) {
         let question = items[i];
@@ -171,7 +171,7 @@ function convertProManGameWaypointTemplate(waypoint) {
     //erst mit den Standard-Fragole-Templates probieren
     let tempTemplate = ItemLib.convertWaypointTemplate(templateString, false);
     if (typeof tempTemplate === 'undefined') {
-        if (ProManGameTemplates.WAYPOINT_ADD_COINS.name === templateString){
+        if (ProManGameTemplates.WAYPOINT_ADD_COINS.name === templateString) {
             return ProManGameTemplates.WAYPOINT_ADD_COINS;
         } else if (ProManGameTemplates.WAYPOINT_NORMAL.name === templateString) {
             return ProManGameTemplates.WAYPOINT_NORMAL;
@@ -189,7 +189,7 @@ function convertProManGameWaypointTemplate(waypoint) {
             return ProManGameTemplates.WAYPOINT_WATER;
         //nothing matches? then return WAYPOINT_DEFAULT Template
         } else {
-        return DefaultTemplates.WAYPOINT_DEFAULT;
+            return DefaultTemplates.WAYPOINT_DEFAULT;
         }
     } else {
         return tempTemplate;
@@ -203,4 +203,4 @@ module.exports = {
     getProManGameRetros: getProManGameRetros,
     getProManGameQuestions: getProManGameQuestions,
     connectProManGameWaypoints: connectProManGameWaypoints,
-}
+};

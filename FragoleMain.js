@@ -13,8 +13,8 @@ const FragoleServer = require('./lib/FragoleServer.js');
 const Lib = require('./lib/FragoleLib.js');
 const ItemLib = require('./lib/FragoleItemLib.js');
 const {Game, GameController, GameState, Player, PlayerToken, Collection,
-       Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
-       Progress, PlayerProgress, Prompt, Card, CardStack, CardHand, Button} = require('./objects/FragoleObjects.js');
+    Waypoint, Dice, Statistic, PlayerStatistic, Rating, PlayerRating,
+    Progress, PlayerProgress, Prompt, Card, CardStack, CardHand, Button} = require('./objects/FragoleObjects.js');
 const prompts = require('./content/Prompts.js');
 const gameItems = require('./content/gameItems.js');
 const Lobby = require('./lib/FragoleLobby.js');
@@ -110,7 +110,7 @@ items.cardStackGood.shuffle();
 
 // add (potential) players to the gameController
 game.gameControllers[0].addPlayer(items.player1)
-                       .addPlayer(items.player2);
+    .addPlayer(items.player2);
 
 let lobby = new Lobby(controller);
 
@@ -120,9 +120,9 @@ let lobby = new Lobby(controller);
 STATE_INIT.setHandlers({
 
     enter:  () => {
-        let wps = ItemLib.getWaypoints(configContentFiles["Waypoint"]);
-        let prompts = ItemLib.getPrompts(configContentFiles["Prompt"]);
-        let questions = ItemLib.getQuestions(configContentFiles["Question"]);
+        let wps = ItemLib.getWaypoints(configContentFiles['Waypoint']);
+        let prompts = ItemLib.getPrompts(configContentFiles['Prompt']);
+        let questions = ItemLib.getQuestions(configContentFiles['Question']);
         // assign player_tokens etc. to players
         items.player1.addInventory(items.playerToken1);
         items.player1.addInventory(items.player1Points);
@@ -155,7 +155,7 @@ STATE_INIT.setHandlers({
 
         // connect waypoints - setup paths
         //gameItems.connectWaypoints();
-        ItemLib.connectWaypoints(wps, configContentFiles["WaypointConnect"]);
+        ItemLib.connectWaypoints(wps, configContentFiles['WaypointConnect']);
         items.playerToken1.waypoint = wps.start;
         items.playerToken2.waypoint = wps.start;
 
@@ -164,7 +164,7 @@ STATE_INIT.setHandlers({
         items.btnEndTurn.deactivate(controller.joinedPlayers);
         controller.rpcCall(controller.joinedPlayers, ['drawImage', 'test', 'assets/connectors.png', 'back', 0, 0]);
         for (let p of controller.joinedPlayers) {
-            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles["BackgroundImage"]));
+            p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles['BackgroundImage']));
         }
         controller.nextPlayer();
         controller.sendLog('Spiel', {content:'Herzlich Willkommen!'});
@@ -310,7 +310,7 @@ STATE_ENTER_WAYPOINT.setHandlers({
                 icon = 'frown';
             }
             Lib.probably(risk, () => controller.sendPopup({header:'Schlimme Dinge!', msg:'Ziehe eine Risiko-Karte', icon:'lightning', players:controller.activePlayer, x:200, y:10, color:'red'}),
-                               () => controller.sendPopup({header:header, msg:'Dein Risiko beträgt: ' + risk, icon:icon, players:controller.activePlayer, x:200, y:10, color:color}));
+                () => controller.sendPopup({header:header, msg:'Dein Risiko beträgt: ' + risk, icon:icon, players:controller.activePlayer, x:200, y:10, color:color}));
             controller.activePlayer.set('risk', risk);
             controller.activePlayer.set('path', controller.set('path', wp.category));
         }
@@ -347,8 +347,8 @@ STATE_QUESTION.setHandlers({
 
     questionCorrect(id, option, value, question) {
         controller.activePlayer.inc('points', value);
-       //gameItems.prompts.question1.showResult(controller.activePlayer);
-       controller.items.question1.showResult(controller.activePlayer);
+        //gameItems.prompts.question1.showResult(controller.activePlayer);
+        controller.items.question1.showResult(controller.activePlayer);
     },
 });
 

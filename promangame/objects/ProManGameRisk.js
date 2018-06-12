@@ -66,7 +66,7 @@ class ProManGameRisk extends Prompt {
                 break;
             default:
                 break;
-        };
+        }
         this.gameController.rpcServer.disconnect('risk_' + this.id);
     }
 }

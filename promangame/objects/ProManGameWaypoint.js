@@ -30,6 +30,5 @@ class ProManGameWaypoint extends Waypoint {
         this.extraWater = extraWater;
         this.shopping = shopping;
     }
-
 }
 module.exports.ProManGameWaypoint = ProManGameWaypoint;

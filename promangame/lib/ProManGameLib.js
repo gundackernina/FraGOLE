@@ -9,7 +9,7 @@
  * @Copyright: Nina Gundacker
  */
 
- /**
+/**
  * Common functionalities for ProManGame
  */
 const ProManGameTemplates = require('../content/promangame_templates.js');
@@ -72,13 +72,13 @@ function getShoppingFormString(player) {
     //Player agil ist und noch keinen hat ODER
     //Player den Shopping-Dialog das erste Mal aufruft
     if ((player.agil && !umbrella.context.value) || player.firstShoppingCall) {
-        result = result.replace("umbrella\" disabled ", "umbrella\" ");
+        result = result.replace('umbrella\" disabled ', 'umbrella\" ');
     }
     if ((player.agil && !helmet.context.value) || player.firstShoppingCall) {
-        result = result.replace("helmet\" disabled ", "helmet\" ");
+        result = result.replace('helmet\" disabled ', 'helmet\" ');
     }
     if ((player.agil && !rope.context.value) || player.firstShoppingCall) {
-        result = result.replace("rope\" disabled ", "rope\" ");
+        result = result.replace('rope\" disabled ', 'rope\" ');
     }
     return result;
 }
@@ -101,7 +101,7 @@ function checkAndChargeShopping(player, data) {
     //Inventory Control - which items does the player want to buy?
     for (let index = 0; index < data.length; index++) {
         let shoppingItem = data[index];
-        if (shoppingItem.name === 'select_bottles' && shoppingItem.value !== ""){
+        if (shoppingItem.name === 'select_bottles' && shoppingItem.value !== '') {
             anzBottles = shoppingItem.value;
         } else if (shoppingItem.name === 'checkbox_umbrella') {
             umbrella = 1;
@@ -123,13 +123,13 @@ function checkAndChargeShopping(player, data) {
         let bottles = player.getInventory({id: player.id + 'Bottles'});
         let bottlesAfter = bottles.context.value + parseInt(anzBottles);
         player.set('bottles', bottlesAfter);
-        if (umbrella == 1){
+        if (umbrella == 1) {
             player.set('umbrella', true);
         }
-        if (rope == 1){
+        if (rope == 1) {
             player.set('rope', true);
         }
-        if (helmet == 1){
+        if (helmet == 1) {
             player.set('helmet', true);
         }
 
@@ -177,7 +177,7 @@ function addOrRemoveInventory(wp, player) {
     //ADD OR REMOVE PROCOINS - only if the player is agil and the waypoint is a Retrospektive-Punkt
     } else if (wp.template instanceof ProManGameTemplates.WAYPOINT_RETROSPECTIVE &&
                 player.agil) {
-        console.log("ProCoins Retrospektive");
+        console.log('ProCoins Retrospektive');
     //set Flag, if player has reached the peak "Hoher Alpstein", otherwise he cannot win
     } else if (wp.template instanceof ProManGameTemplates.WAYPOINT_STOP) {
         player.hoherAlpsteinPassed = true;
@@ -197,10 +197,10 @@ module.exports.addOrRemoveInventory = addOrRemoveInventory;
 function proCoinsAdd(player, anzProCoins) {
     let proCoins = player.getInventory({id: player.id + 'Money'});
     let proCoinsAfter = proCoins.context.value;
-    console.log("ProCoins zuvor: " + proCoinsAfter);
+    console.log('ProCoins zuvor: ' + proCoinsAfter);
     proCoinsAfter = proCoins.context.value + anzProCoins;
     player.set('money', proCoinsAfter);
-    console.log("ProCoins danach: " + proCoinsAfter);
+    console.log('ProCoins danach: ' + proCoinsAfter);
 }
 module.exports.proCoinsAdd = proCoinsAdd;
 
@@ -217,10 +217,10 @@ module.exports.proCoinsAdd = proCoinsAdd;
 function waterAdd(player, anzWater) {
     let bottles = player.getInventory({id: player.id + 'Bottles'});
     let bottlesAfter = bottles.context.value;
-    console.log("Wasser zuvor: " + bottlesAfter);
+    console.log('Wasser zuvor: '+ bottlesAfter);
     bottlesAfter = bottles.context.value + anzWater;     
     player.set('bottles', bottlesAfter);
-    console.log("Wasser danach: " + bottlesAfter);
+    console.log('Wasser danach: ' + bottlesAfter);
 
     //no Water left?
     if (bottlesAfter > 0) {
@@ -235,13 +235,13 @@ module.exports.waterAdd = waterAdd;
 /**
  * Returns the waypoint of the current active player
  * @param {GameController} controller 
- * @param {String} player1_Id 
+ * @param {String} player1Id 
  * @returns {ProManGameWaypoint} waypoint
  */
-function getActivePlayerWaypoint(controller, player1_Id) {
+function getActivePlayerWaypoint(controller, player1Id) {
     let player = controller.activePlayer;
     let waypoint;
-    if (player.id.valueOf() === player1_Id.valueOf()){
+    if (player.id.valueOf() === player1Id.valueOf()) {
         waypoint = controller.items.playerToken1.waypoint;
     } else {
         waypoint = controller.items.playerToken2.waypoint;

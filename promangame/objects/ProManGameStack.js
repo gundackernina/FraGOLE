@@ -20,7 +20,7 @@ const Templates = require('../../lib/FragoleTemplates.js');
 */
 class ProManGameStack extends Component {
     /**
-    * create a ProManGameRiskStack
+    * create a ProManGameStack
     * @param {string} id - unique id
     */
     constructor(id, template=Templates.CARD_STACK_DEFAULT) {

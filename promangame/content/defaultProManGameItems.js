@@ -9,7 +9,7 @@
  * @Copyright: Nina Gundacker
  */
 
- /**
+/**
   * Hier sind die Default-Komponenten für das Spiel Gipfeleroberer gespeichert.
   * Auf diese wird zurueckgegriffen wenn keine JSON-Konfiguration hinterlegt ist,
   * oder die entsprechenden JSON-Dateien fuer die einzelnen Items nicht gefunden
@@ -113,65 +113,75 @@ let defaultWaypoints = {
 //Risko-Karten
 let defaultRisks = {
     risk1: new ProManGameRisk('risk1', 'Risiko',
-    '<p>Einmal aussetzen</p>',
-    '',
-    {
-        'OK':{action:'skip', value:1},
-    }),
+        '<p>Einmal aussetzen</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'skip', value:1},
+        }),
     risk2: new ProManGameRisk('risk2', 'Risiko',
-    '<p>Die Gruppe findet eine Abkürzung. 2 Felder vor.</p>',
-    '',
-    {
-        'OK':{action:'forward', value:2},
-    }),
+        '<p>Die Gruppe findet eine Abkürzung. 2 Felder vor.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'forward', value:2},
+        }),
     risk3: new ProManGameRisk('risk3', 'Risiko',
-    '<p>Sie haben Ihren Geldbeutel liegen lassen: 3 Felder zurück</p>',
-    '',
-    {
-        'OK':{action:'backward', value:3},
-    }), 
+        '<p>Sie haben Ihren Geldbeutel liegen lassen: 3 Felder zurück</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'backward', value:3},
+        }), 
     risk4: new ProManGameRisk('risk4', 'Risiko',
-    '<p>Sie finden eine Wasserflasche</p>',
-    '',
-    {
-        'OK':{action:'water', value:1},
-    }), 
+        '<p>Sie finden eine Wasserflasche</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'water', value:1},
+        }), 
     risk5: new ProManGameRisk('risk5', 'Risiko',
-    '<p>Sie machen eine Pause und bekommen dafür 2 ProCoins.</p>',
-    '',
-    {
-        'OK':{action:'proCoins', value:2},
-    }), 
+        '<p>Sie machen eine Pause und bekommen dafür 2 ProCoins.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'proCoins', value:2},
+        }), 
     risk6: new ProManGameRisk('risk6', 'Risiko',
-    '<p>Es fängt an zu regnen, wenn Sie keinen Regenschirm mitgenommen haben<br>müssen Sie eine Runde aussetzen.</p>',
-    '',
-    {
-        'OK':{action:'noUmbrella', value:1},
-    }), 
+        '<p>Es fängt an zu regnen, wenn Sie keinen Regenschirm mitgenommen haben<br>müssen Sie eine Runde aussetzen.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'noUmbrella', value:1},
+        }), 
     risk7: new ProManGameRisk('risk7', 'Risiko',
-    '<p>Ein Steinschlag hält ihre Risikogruppe auf.<br>Wenn Sie keinen Helm mitgenommen haben<br>müssen Sie zwei Runden aussetzen.</p>',
-    '',
-    {
-        'OK':{action:'noHelmet', value:2},
-    }), 
+        '<p>Ein Steinschlag hält ihre Risikogruppe auf.<br>Wenn Sie keinen Helm mitgenommen haben<br>müssen Sie zwei Runden aussetzen.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'noHelmet', value:2},
+        }), 
     risk8: new ProManGameRisk('risk8', 'Risiko',
-    '<p>Eine steile Felswand behindert ihr Vorwärtskommen.<br>Wenn sie kein Seil mitgenommen haben<br>müssen Sie drei Runden aussetzen.</p>',
-    '',
-    {
-        'OK':{action:'noRope', value:3},
-    }),
+        '<p>Eine steile Felswand behindert ihr Vorwärtskommen.<br>Wenn sie kein Seil mitgenommen haben<br>müssen Sie drei Runden aussetzen.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'noRope', value:3},
+        }),
     risk9: new ProManGameRisk('risk9', 'Risiko',
-    '<p>Sie haben ihren Rucksack im Auto liegen lassen.<br>Sie müssen zurück zum Start.</p>',
-    '',
-    {
-        'OK':{action:'backToStart', value:0},
-    }),
+        '<p>Sie haben ihren Rucksack im Auto liegen lassen.<br>Sie müssen zurück zum Start.</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'backToStart', value:0},
+        }),
     risk10: new ProManGameRisk('risk10', 'Risiko',
-    '<p>Die Hütte ist in Sicht: 1 Feld vorwärts</p>',
-    '',
-    {
-        'OK':{action:'forward', value:1},
-    }),   
+        '<p>Die Hütte ist in Sicht: 1 Feld vorwärts</p>',
+        '',
+        {
+            // eslint-disable-next-line quote-props
+            'OK':{action:'forward', value:1},
+        }),   
 };
 
 //Frage-Karten
@@ -199,26 +209,32 @@ let defaultQuestions = {
             'American Standard for Coded Information Intelligence':{correct:false, value:0},
             'American Standard for Coded Information Interchange':{correct:true, value:3},
         }, 'Test'),
-}
+};
 
 let defaultTasks = {
     task1: new Question('task1', 'Aufgabe',
         '<p>Wie sieht die binäre Zahl 101110 in der Hexadezimalen-Schreibweise aus?</p>',
         '',
         {
+            // eslint-disable-next-line quote-props
             'B2':{correct:false, value:0},
+            // eslint-disable-next-line quote-props
             '2E':{correct:true, value:1},
+            // eslint-disable-next-line quote-props
             '1F':{correct:false, value:0},
         }),
     task2: new Question('task2', 'Aufgabe',
         '<p>Wie schreibt man die dezimale Zahl 144 im oktaler Schreibweise?</p>',
         '',
         {
+            // eslint-disable-next-line quote-props
             '120':{correct:false, value:0},
+            // eslint-disable-next-line quote-props
             '432':{correct:false, value:0},
+            // eslint-disable-next-line quote-props
             '220':{correct:true, value:1},
         }),
-}
+};
 
 let defaultRetros = {
     retro1: new Question('retro1', 'Retrospektive',
@@ -237,7 +253,7 @@ let defaultRetros = {
             'Gipfel Hoher Alpstein (Dunkelrot)':{correct:true, value:1},
             'Fernblickweg Zum Großen Weißer (Weiß)':{correct:false, value:0},
         }),
-}
+};
 
 function defaultConnectWaypoints(wps) {
     let paths = {};
@@ -280,7 +296,6 @@ function defaultConnectWaypoints(wps) {
     //Connect Gemsenweg with Wasserfallsteig and Normalweg
     Lib.connectWaypoints([wps.wpSplit61, wps.wp70], true);
     Lib.connectWaypoints([wps.wp71, wps.wpShopWater22], true);
-
 }
 
 module.exports = {
