@@ -72,7 +72,7 @@ let players = {player1: new ProManGamePlayer(player1Id, true),
 };
 
 let tokens = {playerToken1: new PlayerToken('PlayerToken1', 'playertokens', 177, 450),
-    playerToken2: new PlayerToken('PlayerToken2', 'playertokens', 151, 364),
+    playerToken2: new PlayerToken('PlayerToken2', 'playertokens', 177, 450),
 };
 
 let stats = {
@@ -214,7 +214,7 @@ STATE_INIT.setHandlers({
 
 STATE_SHOPPING.setHandlers({
     enter: () => {
-        controller.items.btnShopping.activate();
+        controller.items.btnShopping.activate(controller.joinedPlayers);
         controller.items.btnAufgabe.deactivate();
         controller.items.btnRisikokarte.deactivate();
         controller.items.btnWissenskarte.deactivate();
@@ -229,7 +229,7 @@ STATE_SHOPPING.setHandlers({
         
         switch(id) {
             case 'btnShopping':
-                controller.items.btnShopping.deactivate();
+                controller.items.btnShopping.deactivate(player);
                 shopForm = controller.items.shoppingForm;
                 shopForm.context.content = ProManGameLib.getShoppingFormString(player);
                 shopForm.show(player);
@@ -270,7 +270,18 @@ STATE_SHOPPING.setHandlers({
         //Einkauf erfolgreich
         } else {
             player.firstShoppingCall = false;
-            controller.nextState(STATE_NEXT_PLAYER);
+            //entweder ist der andere Player auch schon mit dem Shoppen fertig, dann
+            //STATE_NEXT_PLAYER oder so lange warten, bis beide fertig sind
+            let nextState = true;
+            for (let p of controller.joinedPlayers) {
+                if (p.firstShoppingCall) {
+                    nextState = false;
+                    break;
+                }
+            }
+            if (nextState) {
+                controller.nextState(STATE_NEXT_PLAYER);
+            }
         }
     },
 
@@ -298,8 +309,7 @@ STATE_SHOPPING.setHandlers({
 
 STATE_KNOWLEDGE.setHandlers({
     enter: () => {
-        //TODO: nur fuer bestimmten Player aktivieren
-        controller.items.btnWissenskarte.activate();
+        controller.items.btnWissenskarte.activate(controller.activePlayer);
         controller.items.btnRisikokarte.deactivate();
         controller.items.btnAufgabe.deactivate();
         controller.items.btnShopping.deactivate();
@@ -343,7 +353,7 @@ STATE_KNOWLEDGE.setHandlers({
 //Risikokarte ziehen
 STATE_RISK.setHandlers({
     enter: () => {
-        controller.items.btnRisikokarte.activate();
+        controller.items.btnRisikokarte.activate(controller.activePlayer);
         controller.items.btnWissenskarte.deactivate();
         controller.items.btnAufgabe.deactivate();
         controller.items.btnShopping.deactivate();
@@ -446,7 +456,8 @@ STATE_RISK.setHandlers({
 //Eine Aufgabe erledigen
 STATE_TASK.setHandlers({
     enter: () => {
-        controller.items.btnAufgabe.activate();
+        //Eine Aufgabe müssen beide Erledigen
+        controller.items.btnAufgabe.activate(controller.joinedPlayers);
         controller.items.btnWissenskarte.deactivate();
         controller.items.btnRisikokarte.deactivate();
         controller.items.btnShopping.deactivate();
@@ -463,8 +474,9 @@ STATE_TASK.setHandlers({
             case 'btnTask':
                 controller.items.btnAufgabe.deactivate();
                 task = controller.items.proManGameTaskStack.getProManGameStackItem();
-                //TODO: Aufgabe beiden Playern anzeigen
-                task.show(player);
+                for (let p of controller.joinedPlayers) {
+                    task.show(p);
+                }           
                 break;
             default:
                 break;
@@ -494,7 +506,7 @@ STATE_TASK.setHandlers({
 //Eine Retrospektive durchführen
 STATE_RETROSPECTIVE.setHandlers({
     enter: () => {
-        controller.items.btnRetro.activate();
+        controller.items.btnRetro.activate(controller.activePlayer);
         controller.items.btnAufgabe.deactivate();
         controller.items.btnWissenskarte.deactivate();
         controller.items.btnRisikokarte.deactivate();
