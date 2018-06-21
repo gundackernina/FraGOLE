@@ -124,7 +124,7 @@ let stacks =  {
 //Erst mal leer initialisieren, der String wird dann hineingesetzt
 const shoppingForm = new Form('shoppingForm', 'Ausrüstung einkaufen', '');
 
-// add (potential) players to the gameController
+//die Player dem gameController hinzufuegen
 game.gameControllers[0].addPlayer(players.player1)
     .addPlayer(players.player2);
 
@@ -174,7 +174,6 @@ STATE_INIT.setHandlers({
         for (let p of src.joinedPlayers) {
             //Listener auf das jeweilige Inventory registrieren
             p.subscribe('stat', p.getInventory({id: p.id + 'Stat'}));
-            //p.subscribe('prog', p.getInventory({id: p.id + 'Prog'}));
             p.subscribe('money', p.getInventory({id: p.id + 'Money'}));
             p.subscribe('bottles', p.getInventory({id: p.id + 'Bottles'}));
             p.subscribe('umbrella', p.getInventory({id: p.id + 'Umbrella'}));
@@ -185,7 +184,6 @@ STATE_INIT.setHandlers({
             //Da man zu Beginn erst mal Einkaufen gehen muss, sind nur die 
             //30 ProCoins vorhanden
             p.set('stat', 10);
-            //p.set('prog', 50);
             p.set('money', 30);
             p.set('bottles', 0);    
             p.set('umbrella', false);
@@ -222,8 +220,8 @@ STATE_SHOPPING.setHandlers({
     },
 
     click: (id, item, clientId) => {
-        // get the player that clicked the button
         let controller = item.gameController;
+        // Player ermitteln, der auf den Button geklickt hat
         let player = controller.playersId[clientId];
         let shopForm;
         
@@ -317,8 +315,8 @@ STATE_KNOWLEDGE.setHandlers({
     },
 
     click: (id, item, clientId) => {
-        // get the player that clicked the button
         let controller = item.gameController;
+        // Player ermitteln, der auf den Button geklickt hat
         let player = controller.playersId[clientId];
         let category = 'Test';
         let question; 
@@ -361,7 +359,6 @@ STATE_RISK.setHandlers({
     },
 
     click: (id, item, clientId) => {
-        // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.activePlayer;
         let risk;
@@ -465,9 +462,7 @@ STATE_TASK.setHandlers({
     },
 
     click: (id, item, clientId) => {
-        // get the player that clicked the button
         let controller = item.gameController;
-        let player = controller.activePlayer;
         let task;
         
         switch(id) {
@@ -514,7 +509,6 @@ STATE_RETROSPECTIVE.setHandlers({
     },
 
     click: (id, item, clientId) => {
-        // get the player that clicked the button
         let controller = item.gameController;
         let player = controller.activePlayer;
         let retro;

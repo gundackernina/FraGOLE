@@ -10,9 +10,9 @@
  */
 
 /**
-  * Hier sind die Default-Komponenten für das Spiel Gipfeleroberer gespeichert.
-  * Auf diese wird zurueckgegriffen wenn keine JSON-Konfiguration hinterlegt ist,
-  * oder die entsprechenden JSON-Dateien fuer die einzelnen Items nicht gefunden
+  * Default-Componentes for ProManGame (Gipfeleroberer)
+  * Default-Components are used, when no JSON configuration path was commited 
+  * or the JSON configuration files for the individual componentes are not found
   * werden
   */
 const Lib = require('../../lib/FragoleLib.js');

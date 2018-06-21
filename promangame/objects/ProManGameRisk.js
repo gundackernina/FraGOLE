@@ -18,7 +18,7 @@ const ProManGameTemplates = require('../content/promangame_templates.js');
 
 /** Class ProManGameRisk
 * @extends {module:Prompt~Prompt}
-// Implements a clients-side prompt with multiple options
+* Implements a clients-side prompt with multiple options
 */
 class ProManGameRisk extends Prompt {
     constructor(id, header, content, image, actions={}, template=ProManGameTemplates.RISK_DEFAULT) {
@@ -32,46 +32,44 @@ class ProManGameRisk extends Prompt {
         this.draw(players);
     }
 
-    /** gets called when an answer button is clicked */
-    select(option, clientId) {
-        let selection = this.context.actions[option];
-        let action = selection.action;
-        let value = selection.value;
-        this.context.selection = option;
-        switch (action) {
-            case 'skip':
-                this.gameController.emit('skip', this.id, option, selection.value, this, clientId);
-                break;
-            case 'forward':
-            case 'backward':
-                this.gameController.emit('forwardOrBackward', this.id, option, selection.value, this, clientId);
-                break;
-            case 'water':    
-                this.gameController.emit('water', this.id, option, selection.value, this, clientId);
-                break;
-            case 'proCoins': 
-                this.gameController.emit('proCoins', this.id, option, selection.value, this, clientId);
-                break;
-            case 'noUmbrella': 
-                this.gameController.emit('noUmbrella', this.id, option, selection.value, this, clientId);
-                break;
-            case 'noRope': 
-                this.gameController.emit('noRope', this.id, option, selection.value, this, clientId);
-                break;
-            case 'noHelmet': 
-                this.gameController.emit('noHelmet', this.id, option, selection.value, this, clientId);
-                break;
-            case 'backToStart': 
-                this.gameController.emit('backToStart', this.id, option, selection.value, this, clientId);
-                break;
-            default:
-                break;
-        }
-        this.gameController.rpcServer.disconnect('risk_' + this.id);
+/** gets called when an answer button is clicked */
+select(option, clientId) {
+    let selection = this.context.actions[option];
+    let action = selection.action;
+    this.context.selection = option;
+    switch (action) {
+        case 'skip':
+            this.gameController.emit('skip', this.id, option, selection.value, this, clientId);
+            break;
+        case 'forward':
+        case 'backward':
+            this.gameController.emit('forwardOrBackward', this.id, option, selection.value, this, clientId);
+            break;
+        case 'water':    
+            this.gameController.emit('water', this.id, option, selection.value, this, clientId);
+            break;
+        case 'proCoins': 
+            this.gameController.emit('proCoins', this.id, option, selection.value, this, clientId);
+            break;
+        case 'noUmbrella': 
+            this.gameController.emit('noUmbrella', this.id, option, selection.value, this, clientId);
+            break;
+        case 'noRope': 
+            this.gameController.emit('noRope', this.id, option, selection.value, this, clientId);
+            break;
+        case 'noHelmet': 
+            this.gameController.emit('noHelmet', this.id, option, selection.value, this, clientId);
+            break;
+        case 'backToStart': 
+            this.gameController.emit('backToStart', this.id, option, selection.value, this, clientId);
+            break;
+        default:
+            break;
     }
+    this.gameController.rpcServer.disconnect('risk_' + this.id);
+}
 }
 
 module.exports  = {
     ProManGameRisk: ProManGameRisk,
-    //ProManGameRiskStack: ProManGameRiskStack,
 };

@@ -18,7 +18,9 @@ const ProManGameTemplates = require('../content/promangame_templates.js');
 
 /** Class ProManGameQuestion
 * @extends {module:Question~Question}
-// Implements a clients-side prompt with multiple options
+* Implements a clients-side prompt with multiple options
+* a ProManGameQuestion has a String property category to 
+* classify the Questions
 */
 class ProManGameQuestion extends Question {
     constructor(id, header, content, image, actions={}, category, template=Templates.QUESTION_DEFAULT) {

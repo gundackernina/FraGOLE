@@ -68,9 +68,9 @@ function getShoppingFormString(player) {
     let rope = player.getInventory({id: player.id + 'Rope'});
     let result = shoppingFormString;
 
-    //Das Einkaufen eines Schirms nur aktivieren wenn
-    //Player agil ist und noch keinen hat ODER
-    //Player den Shopping-Dialog das erste Mal aufruft
+    //only enable umbrella checkbox if 
+    //player is agile and has no umbrella in his inventory or
+    //its the first call of the shopping modal dialog
     if ((player.agil && !umbrella.context.value) || player.firstShoppingCall) {
         result = result.replace('umbrella\" disabled ', 'umbrella\" ');
     }

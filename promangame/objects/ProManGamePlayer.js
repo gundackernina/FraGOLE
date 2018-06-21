@@ -14,7 +14,10 @@ const Player = require('../../objects/Player.js').Player;
 /** Class ProManGamePlayer
 * @extends {module:Player~Player}
 * logical representation of a ProManGamePlayer
-* has an Inventory => Collection of GameObject
+* a ProManGamePlayer has a boolean property if he is an agile Player or not
+* a ProManGamePlayer has a boolean property if he has finished the game or not
+* a ProManGamePlayer has a boolean property if he is shopping for the first time or not
+* a ProManGamePlayer has a boolean property if he has passed the peak hoher Alpstein or not
 */
 class ProManGamePlayer extends Player {
     constructor(id, agil) {

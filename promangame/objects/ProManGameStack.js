@@ -26,9 +26,9 @@ class ProManGameStack extends Component {
     constructor(id, template=Templates.CARD_STACK_DEFAULT) {
         super(id, template);
         this.context.contentId = 'proManGame_stack_' + id;
-        //die ProManGameItems die im Stapel vorhanden sein sollen
+        //the ProManGameItems that should be in the stack
         this.proManGameItems = new Collection();
-        //die Ids der ProManGameRisks
+        //ids of ProManGame Items
         this.stack = [];
     }
 
