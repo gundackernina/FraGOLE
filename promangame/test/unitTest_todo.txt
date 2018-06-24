@@ -1,0 +1,5 @@
+Für die Qualitätssicherung der Online-Version des ProManGame wurden ein Installationstest, 
+ein zustandsbasierter Test sowie ein explorativer Test durchgefuehrt. 
+Gerade letzterer wurde aufgrund des zeitlich sehr begrenzten Rahmens anstelle von UnitTests durchgefuehrt. 
+Dennoch sollten vor allem  die Funktionen in den JavaScript-Files der lib-Ordner 
+(z.B. FragoleLib.js, ProManGameLib.js) in Zukunft durch Unit Tests auf ihre Integritaet geprueft werden.
