@@ -194,7 +194,7 @@ STATE_INIT.setHandlers({
         items.playerToken1.waypoint = items.wpStartZiel;
         items.playerToken2.waypoint = items.wpStartZiel;
 
-        ProManGameItemLib.connectProManGameWaypoints(wps, configContentFiles['WaypointConnect']);
+        ProManGameItemLib.connectProManGameWaypoints(wps, configContentFiles['WaypointConnect'], src);
         
         for (let p of src.joinedPlayers) {
             console.log(p.name);

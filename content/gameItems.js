@@ -124,7 +124,7 @@ let waypoints = {
     wp405: new Waypoint('wp405', 'path5', 1010, 420, CustomTemplates.WAYPOINT_SMALL_ORANGE),
 };
 
-function connectWaypoints() {
+function connectWaypoints(gameController) {
     let paths = {};
 
     for (let k in waypoints) {
@@ -136,22 +136,22 @@ function connectWaypoints() {
         }
     }
 
-    Lib.connectWaypoints(paths['path1'], true);
-    Lib.connectWaypoints(paths['path2'], true);
-    Lib.connectWaypoints(paths['path3'], true);
-    Lib.connectWaypoints(paths['path4'], true);
-    Lib.connectWaypoints(paths['path5'], true);
+    Lib.connectWaypoints(paths['path1'], gameController, true);
+    Lib.connectWaypoints(paths['path2'], gameController, true);
+    Lib.connectWaypoints(paths['path3'], gameController, true);
+    Lib.connectWaypoints(paths['path4'], gameController, true);
+    Lib.connectWaypoints(paths['path5'], gameController, true);
 
     // connect paths
-    Lib.connectWaypoints([waypoints.wp56, waypoints.start], true);
-    Lib.connectWaypoints([waypoints.start, waypoints.wp101], true);
-    Lib.connectWaypoints([waypoints.wp111, waypoints.peak], true);
-    Lib.connectWaypoints([waypoints.wp305, waypoints.camp1], true);
-    Lib.connectWaypoints([waypoints.bigcamp1, waypoints.wp301], true);
-    Lib.connectWaypoints([waypoints.camp4, waypoints.wp201], true);
-    Lib.connectWaypoints([waypoints.camp2, waypoints.wp211], true);
-    Lib.connectWaypoints([waypoints.bigcamp2, waypoints.wp401], true);
-    Lib.connectWaypoints([waypoints.wp405, waypoints.camp3], true);
+    Lib.connectWaypoints([waypoints.wp56, waypoints.start], gameController, true);
+    Lib.connectWaypoints([waypoints.start, waypoints.wp101], gameController, true);
+    Lib.connectWaypoints([waypoints.wp111, waypoints.peak], gameController, true);
+    Lib.connectWaypoints([waypoints.wp305, waypoints.camp1], gameController, true);
+    Lib.connectWaypoints([waypoints.bigcamp1, waypoints.wp301], gameController, true);
+    Lib.connectWaypoints([waypoints.camp4, waypoints.wp201], gameController, true);
+    Lib.connectWaypoints([waypoints.camp2, waypoints.wp211], gameController, true);
+    Lib.connectWaypoints([waypoints.bigcamp2, waypoints.wp401], gameController, true);
+    Lib.connectWaypoints([waypoints.wp405, waypoints.camp3], gameController, true);
 }
 
 let prompts = {

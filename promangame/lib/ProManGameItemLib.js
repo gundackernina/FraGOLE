@@ -101,15 +101,15 @@ function getProManGameQuestions(jsonItemContentProManGameQuestions) {
  * @param {ProManGameWaypoints} wps 
  * @param {String} filenameConnectWaypoints 
  */
-function connectProManGameWaypoints(wps, jsonItemContentConnectWaypoints) {
+function connectProManGameWaypoints(wps, jsonItemContentConnectWaypoints, gameController) {
     if (usedDefaultWaypoints) {
-        defaultProManGameItems.defaultConnectWaypoints(wps);
+        defaultProManGameItems.defaultConnectWaypoints(wps, gameController);
     } else if (typeof jsonItemContentConnectWaypoints === 'undefined') {
-        console.log(`Es wurden Wapoints in einer JSON Datei definiert aber keine WaypointConnects.
+        console.log(`Es wurden Waypoints in einer JSON Datei definiert aber keine WaypointConnects.
                     Die Wegpunkte werden nicht miteinander verbunden.`);
     } else {
-        ItemLib.connectPaths(wps);
-        ItemLib.connectSingleWaypoints(jsonItemContentConnectWaypoints, wps);
+        ItemLib.connectPaths(wps, gameController);
+        ItemLib.connectSingleWaypoints(jsonItemContentConnectWaypoints, wps, gameController);
     }
 }
 

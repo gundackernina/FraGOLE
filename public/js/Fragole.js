@@ -114,6 +114,37 @@ Fragole.GameBoard = class GameBoard {
         this.childs[name] = shape;
     }
 
+    drawLine(name, pos_x_from, pos_y_from, pos_x_to, pos_y_to) {
+        //elem already exists, remove to repaint
+        if (this.childs[name]) {
+            this.stage.removeChild(this.childs[name]);
+            this.stage.update();
+        }
+
+        console.log(arguments);
+        var shape = new createjs.Shape();
+        var sg = shape.graphics;
+
+        // Set line size and color
+        sg.setStrokeStyle(2).beginStroke("#000000");
+
+        // start of line 
+        sg.moveTo(pos_x_from, pos_y_from);
+
+        // end of line
+        sg.lineTo(pos_x_to, pos_y_to);
+
+        // Stop drawing this line
+        sg.endStroke();
+
+        this.stage.addChild(shape);
+        this.stage.setChildIndex(shape, 1);
+
+        //Draw elem on canvas
+        this.stage.update();
+        this.childs[name] = shape;
+    }
+
     // Wrapper for drawing images into the canvas
     drawImage (name, src, layer, pos_x, pos_y) {
         if (this.childs[name]) {
@@ -286,7 +317,8 @@ function init() {
         removeDomContent : function(target, fade) { gameboard.removeDomContent(target, fade);},
         emptyDomContent : function(target) { gameboard.emptyDomContent(target);},
         drawShape : function(name, type, fill, stroke, layer, pos_x, pos_y) { gameboard.drawShape(...arguments);},
-        drawImage : function(name, src, layer, pos_x, pos_y) { gameboard.drawImage(name, src, layer,    pos_x, pos_y);},
+        drawImage : function(name, src, layer, pos_x, pos_y) { gameboard.drawImage(name, src, layer, pos_x, pos_y);},
+        drawLine : function(name, pos_x_from, pos_y_from, pos_x_to, pos_y_to) { gameboard.drawLine(name, pos_x_from, pos_y_from, pos_x_to, pos_y_to);},
         activateToken : function(name, callback) { gameboard.activateToken(name, callback);},
         deactivateToken : function(name) { gameboard.deactivateToken(name);},
         moveToken : function(name, pos) { gameboard.moveToken(name, pos);},

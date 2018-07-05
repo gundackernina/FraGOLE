@@ -255,7 +255,7 @@ let defaultRetros = {
         }),
 };
 
-function defaultConnectWaypoints(wps) {
+function defaultConnectWaypoints(wps, gameController) {
     let paths = {};
 
     for (let k in wps) {
@@ -266,36 +266,36 @@ function defaultConnectWaypoints(wps) {
             paths[wp.category]=[wp];
         }
     }
-    Lib.connectWaypoints(paths['path1'], true);
-    Lib.connectWaypoints(paths['path2'], true);
-    Lib.connectWaypoints(paths['path3'], true);
-    Lib.connectWaypoints(paths['path4'], true);
-    Lib.connectWaypoints(paths['path5'], true);
-    Lib.connectWaypoints(paths['path6'], true);
+    Lib.connectWaypoints(paths['path1'], gameController, true);
+    Lib.connectWaypoints(paths['path2'], gameController, true);
+    Lib.connectWaypoints(paths['path3'], gameController, true);
+    Lib.connectWaypoints(paths['path4'], gameController, true);
+    Lib.connectWaypoints(paths['path5'], gameController, true);
+    Lib.connectWaypoints(paths['path6'], gameController, true);
 
     //connect paths
     //Normalweg Rundlauf
-    Lib.connectWaypoints([wps.wp36, wps.wpStartZiel], true);
+    Lib.connectWaypoints([wps.wp36, wps.wpStartZiel], gameController, true);
 
     //Connect Hoellensteig with Normalweg
-    Lib.connectWaypoints([wps.wpSplit5, wps.wp37], true);
-    Lib.connectWaypoints([wps.wp48, wps.wpStop], true);
+    Lib.connectWaypoints([wps.wpSplit5, wps.wp37], gameController, true);
+    Lib.connectWaypoints([wps.wp48, wps.wpStop], gameController, true);
 
     //Connect Fernblickweg with Normalweg
-    Lib.connectWaypoints([wps.wpSplit14, wps.wp49], true);
-    Lib.connectWaypoints([wps.wp53, wps.wpShopWater18], true);
+    Lib.connectWaypoints([wps.wpSplit14, wps.wp49], gameController, true);
+    Lib.connectWaypoints([wps.wp53, wps.wpShopWater18], gameController, true);
 
     //Connect Wasserfallsteig with Normalweg
-    Lib.connectWaypoints([wps.wpSplit9, wps.wp54], true);
-    Lib.connectWaypoints([wps.wp64, wps.wpStop], true);
+    Lib.connectWaypoints([wps.wpSplit9, wps.wp54], gameController, true);
+    Lib.connectWaypoints([wps.wp64, wps.wpStop], gameController, true);
 
     //Connect Panoramaweg with Wasserfallsteig and Normalweg
-    Lib.connectWaypoints([wps.wpSplit57, wps.wp65], true);
-    Lib.connectWaypoints([wps.wp69, wps.wpShopWater18], true);
+    Lib.connectWaypoints([wps.wpSplit57, wps.wp65], gameController, true);
+    Lib.connectWaypoints([wps.wp69, wps.wpShopWater18], gameController, true);
 
     //Connect Gemsenweg with Wasserfallsteig and Normalweg
-    Lib.connectWaypoints([wps.wpSplit61, wps.wp70], true);
-    Lib.connectWaypoints([wps.wp71, wps.wpShopWater22], true);
+    Lib.connectWaypoints([wps.wpSplit61, wps.wp70], gameController, true);
+    Lib.connectWaypoints([wps.wp71, wps.wpShopWater22], gameController, true);
 }
 
 module.exports = {

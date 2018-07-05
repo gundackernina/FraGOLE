@@ -155,14 +155,14 @@ STATE_INIT.setHandlers({
 
         // connect waypoints - setup paths
         //gameItems.connectWaypoints();
-        ItemLib.connectWaypoints(wps, configContentFiles['WaypointConnect']);
+        ItemLib.connectWaypoints(wps, configContentFiles['WaypointConnect'], controller);
         items.playerToken1.waypoint = wps.start;
         items.playerToken2.waypoint = wps.start;
 
         controller.setupBoard();  // Setup the gameboard - draw stuff etc.
         items.btnEndTurn.draw(controller.joinedPlayers);
         items.btnEndTurn.deactivate(controller.joinedPlayers);
-        controller.rpcCall(controller.joinedPlayers, ['drawImage', 'test', 'assets/connectors.png', 'back', 0, 0]);
+        //controller.rpcCall(controller.joinedPlayers, ['drawImage', 'test', 'assets/connectors.png', 'back', 0, 0]);
         for (let p of controller.joinedPlayers) {
             p.session.setBackgroundImage(ItemLib.getBackgroundImage(configContentFiles['BackgroundImage']));
         }
