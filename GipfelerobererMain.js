@@ -28,6 +28,7 @@ const ProManGamePlayer = require('./promangame/objects/ProManGamePlayer.js').Pro
 const ProManGameTemplates = require('./promangame/content/promangame_templates.js');
 const ProManGameLib = require('./promangame/lib/ProManGameLib.js');
 const ProManGameItemLib = require('./promangame/lib/ProManGameItemLib.js');
+const ProManGameOpenQuestion = require('./promangame/objects/ProManGameOpenQuestion.js').ProManGameOpenQuestion;
 
 const player1Id = 'Player1';
 const player2Id = 'Player2'; 
@@ -119,6 +120,21 @@ let stacks =  {
     proManGameQuestionStack: new ProManGameQuestionStack('questionStack'),
     proManGameTaskStack: new ProManGameStack('taskStack'),
     proManGameRetroStack: new ProManGameStack('retroStack'),
+    proManGameOpenQuestionStack: new ProManGameStack('openQuestionStack'),
+};
+let openQuestionContent = '<input name="openQuestionContent" type="text"></input>';
+
+let proManGameOpenQuestions = { 
+    proManGameOpenQuestion1: new ProManGameOpenQuestion('proManGameOpenQuestion1',
+                                                        'Was bedeutet ASCII?',
+                                                        openQuestionContent, 
+                                                        'ABC',
+                                                        2),
+    proManGameOpenQuestion2: new ProManGameOpenQuestion('proManGameOpenQuestion2',
+                                                        'Was bedeutet ANSI?', 
+                                                        openQuestionContent,
+                                                        'BCD',
+                                                        3),
 };
 
 //Erst mal leer initialisieren, der String wird dann hineingesetzt
@@ -133,6 +149,11 @@ let lobby = new Lobby(controller);
 
 STATE_INIT.setHandlers({
     enter:  (src) => {
+        /** Den Openquestions den GameController zuweisen */
+        for (let openQuestion in proManGameOpenQuestions){
+            proManGameOpenQuestions[openQuestion].gameController = src;
+        }
+
         let wps = ProManGameItemLib.getProManGameWaypoints(configContentFiles['ProManGameWaypoint']);
         let risks = ProManGameItemLib.getProManGameRisks(configContentFiles['ProManGameRisk']);
         let questions = ProManGameItemLib.getProManGameQuestions(configContentFiles['ProManGameQuestion']);
@@ -146,6 +167,8 @@ STATE_INIT.setHandlers({
         stacks.proManGameTaskStack.shuffle();
         stacks.proManGameRetroStack.addProManGameItems(retros);
         stacks.proManGameRetroStack.shuffle();
+        stacks.proManGameOpenQuestionStack.addProManGameItems(proManGameOpenQuestions);
+        stacks.proManGameOpenQuestionStack.shuffle();
 
         // Controller mit allen Items initialisieren
         src.addItems(players);
@@ -161,6 +184,7 @@ STATE_INIT.setHandlers({
         src.addItems(stacks);
         src.addItems(prompts);
         src.addItems({shoppingForm});
+        // src.addItems(proManGameOpenQuestions); //Durch Hinzufügen in den Stack überflüssig, geladen durch Zeile 180
 
         // Ausrüstung für Player initialisieren
         let items = src.items;
@@ -324,7 +348,12 @@ STATE_KNOWLEDGE.setHandlers({
         switch(id) {
             case 'btnKnowledge':
                 controller.items.btnWissenskarte.deactivate();
-                question = controller.items.proManGameQuestionStack.getProManGameQuestion(category);
+                if (Math.random() < 0.5) {
+                    question = controller.items.proManGameQuestionStack.getProManGameQuestion(category);  
+                }else{
+                    question = controller.items.proManGameOpenQuestionStack.getProManGameStackItem();
+
+                }
                 question.show(player);
                 break;
             default:
@@ -346,6 +375,51 @@ STATE_KNOWLEDGE.setHandlers({
         question.showResult(player);
         controller.nextState(STATE_SELECT_WAYPOINT);
     },
+    
+    // Formular mit OK abgeschickt
+    formPost: (id, data, form, clientId) => {
+        let player = form.gameController.playersId[clientId];
+       /** console.log('test'); */
+       let answer; 
+       for (let i = 0; i < data.length; i++) {
+            if (data[i].name === 'openQuestionContent') {
+                answer = data[i].value;
+            }
+        }
+        /** console.log(answer); */
+        // Antwort ist richtig
+        if (typeof answer !== 'undefined' && 
+            answer === form.defaultAnswer) {
+                controller.sendPopup({
+                    header:'Voll wrichtig!',
+                    msg:'Antwort ' + answer + ' voll korrekt.',
+                    icon:'warning circle',
+                    players:player, x:150, y:100, color:'green'});
+                controller.set('roll_result', form.value);
+                controller.nextState(STATE_SELECT_WAYPOINT);
+        //Antwort ist falsch
+        }else{
+            controller.sendPopup({
+                header:'Voll falsch!',
+                msg:'Richig wäre gewesen ' + form.defaultAnswer,
+                icon:'warning circle',
+                players:player, x:150, y:100, color:'red'}); 
+            controller.nextState(STATE_NEXT_PLAYER);
+        }
+
+
+    },
+    // Ausgabe wenn Button "Weiß nocht" geklickt wurde
+    formCancel: (id, data, form, clientId) => {
+        let player = form.gameController.playersId[clientId];
+        controller.sendPopup({
+            header:'Schade das du es nicht wusstest. :-( ',
+            msg:'Richig wäre gewesen ' + form.defaultAnswer,
+            icon:'warning circle',
+            players:player, x:150, y:100, color:'red'}); 
+        controller.nextState(STATE_NEXT_PLAYER);
+    },
+
 });
 
 //Risikokarte ziehen
